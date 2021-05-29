@@ -1,3 +1,9 @@
 import { createSelector } from 'reselect'
 
-const selectCart = state => state.currency
+const selectCurrency = state => state.currency
+
+
+export const selectCurrencyOverlayHidden = createSelector(
+    [selectCurrency],
+    currency => currency.currencyOverlayHidden
+)

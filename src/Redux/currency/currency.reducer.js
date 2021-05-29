@@ -9,6 +9,11 @@ export const INITIAL_STATE = {
 
 const currencyReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
+        case CurrencyActionTypes.TOGGLE_CURRENCY_OVERLAY:
+            return {
+                ...state,
+                currencyOverlayHidden: !state.currencyOverlayHidden
+            }
         default:
             return state;
     }

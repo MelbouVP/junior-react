@@ -16,6 +16,8 @@ $c-primary: #5ECE7B;
 
         .navbar__container {
             display: flex;
+            position: relative; // controls cart and currency overlay position
+            align-items: center;
             flex: 1 1 0px;
 
             .navbar__link {
