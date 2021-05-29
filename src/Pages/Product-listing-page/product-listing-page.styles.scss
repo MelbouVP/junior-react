@@ -1,0 +1,22 @@
+
+
+.listing-page {
+    height: 1300px;
+
+    &__container {
+        padding: 6rem;
+
+        .listing-page__header {
+
+            .header__title {
+                font-weight: 400;
+                font-size: 2.6rem;
+            }
+
+        }
+        
+        .listing-page__content {
+            padding-top: 5.5rem;
+        }
+    }
+}
