@@ -4,12 +4,8 @@ export const toggleCurrencyOverlay = () => ({
     type: CurrencyActionTypes.TOGGLE_CURRENCY_OVERLAY
 })
 
-export const changeSelectedCurrency = (currency) => ({
+export const changeSelectedCurrency = (currencyData) => ({
     type: CurrencyActionTypes.CHANGE_SELECTED_CURRENCY,
-    payload: currency
-})
-export const changeSelectedCurrencySuccess = (currencyData) => ({
-    type: CurrencyActionTypes.CHANGE_SELECTED_CURRENCY_SUCCESS,
     payload: currencyData
 })
 

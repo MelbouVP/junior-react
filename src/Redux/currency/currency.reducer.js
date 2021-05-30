@@ -22,7 +22,7 @@ const currencyReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 currencyOverlayHidden: !state.currencyOverlayHidden
             }
-        case CurrencyActionTypes.CHANGE_SELECTED_CURRENCY_SUCCESS: 
+        case CurrencyActionTypes.CHANGE_SELECTED_CURRENCY:
             return {
                 ...state,
                 selectedCurrency: action.payload

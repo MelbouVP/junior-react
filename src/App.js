@@ -14,9 +14,7 @@ import { fetchCurrenciesStart } from './Redux/currency/currency.actions'
 
 import './App.css';
 export class App extends Component {
-  constructor(props){
-    super(props)
-  }
+
 
   componentDidMount() {
     this.props.fetchCurrenciesStart()
