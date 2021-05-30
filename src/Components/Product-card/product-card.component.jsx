@@ -6,8 +6,8 @@ import './product-card.styles.scss'
 
 export class ProductCard extends Component {
     render() {
-        const { name, inStock, prices, gallery, description, category, attributes } = this.props.productData
-        const { selectedCurrency } = this.props
+        const { name, inStock, prices, gallery, attributes } = this.props.productData
+        const { selectedCurrency, handleRedirect, handleCartItem } = this.props
 
         console.log(this.props)
 
@@ -38,7 +38,7 @@ export class ProductCard extends Component {
 
         return (
             <div className="product-card">
-                <div className="product-card__container">
+                <div className="product-card__container" onClick={() => handleRedirect(name)}>
                     <div className="product-card__image">
                         <img src={gallery[0]} alt="Product" />
                     </div>
@@ -70,9 +70,6 @@ export class ProductCard extends Component {
                             </span>
                         </div>
                     </div>
-                    <div className="product-card__cart-icon">
-                        <CartIcon />
-                    </div>
                 </div>
 
                 {
@@ -83,7 +80,9 @@ export class ProductCard extends Component {
                             </div>
                         </div>
                     :
-                        null
+                        <div className="product-card__cart-icon" onClick={handleCartItem}>
+                            <CartIcon />
+                        </div>
                 }
 
             </div>

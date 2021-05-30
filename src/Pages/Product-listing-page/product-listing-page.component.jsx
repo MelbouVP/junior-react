@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import history from '../../history'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
@@ -17,7 +18,13 @@ import './product-listing-page.styles.scss'
 
 export class ProductListingPage extends Component {
 
+    handleRedirect = (productName) => {
+        history.push(`/product/${productName}`)
+    }
 
+    handleCartItem = () => {
+        console.log('added to cart')
+    }
 
     render() {
 
@@ -33,6 +40,8 @@ export class ProductListingPage extends Component {
                     key={index} 
                     productData={data} 
                     selectedCurrency={selectedCurrency} 
+                    handleRedirect={this.handleRedirect}
+                    handleCartItem={this.handleCartItem}
                 />)
         : 
             null

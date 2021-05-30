@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import history from '../../history'
 
 import { ReactComponent as BrandIcon } from '../../Assets/Brand-icon.svg'
 import { ReactComponent as CartIcon } from '../../Assets/Cart-icon.svg'
@@ -55,6 +56,7 @@ export class Navbar extends Component {
 
     handleCategoryChange = (category) =>{
         this.props.changeSelectedCategory(category)
+        history.push('/')
     }
 
     render() {

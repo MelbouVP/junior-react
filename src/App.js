@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-
+import { Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 
 import Navbar from './Components/Navbar/navbar.component'
 import ProductListingPage from './Pages/Product-listing-page/product-listing-page.component'
-
+import ProductPage from './Pages/Product-page/product-page.component'
 import Spinner from './Components/Spinners/spinner.component'
 
 import { selectCurrencyHasLoaded } from './Redux/currency/currency.selectors'
@@ -33,7 +33,10 @@ export class App extends Component {
           currencyHasLoaded ?
             <div className="App">
               <Navbar />
-              <ProductListingPage />
+              <Switch >
+                <Route exact path='/' component={ProductListingPage} />
+                <Route exact path='/product/:name' component={ProductPage} />
+              </Switch>
             </div>
           :
             <Spinner />
