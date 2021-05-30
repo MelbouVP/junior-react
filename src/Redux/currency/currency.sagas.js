@@ -1,7 +1,7 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import CurrencyActionTypes from './currency.types';
 
-import OpusClient from '../../GraphQL/graphQLclient'
+import OpusClient from '../../GraphQL/OpusClient'
 import { CurrencyQuery } from '../../GraphQL/graphQLqueries'
 
 import {  

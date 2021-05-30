@@ -1,14 +1,39 @@
-// import ShopActionTypes from './shop.types'
+import ShopActionTypes from './shop.types'
 
 export const INITIAL_STATE = {
     products: {},
-    selectedCategory: 'Clothes',
-    hasLoaded: true,
+    selectedCategory: 'clothes',
+    shopHasLoaded: true,
     error: null
 }
 
 const shopReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
+        case ShopActionTypes.CHANGE_SELECTED_CATEGORY:
+            return {
+                ...state,
+                selectedCategory: action.payload
+            }
+        case ShopActionTypes.FETCH_PRODUCT_DATA_START:
+            return {
+                ...state,
+                shopHasLoaded: false
+            }
+        case ShopActionTypes.FETCH_PRODUCT_DATA_SUCCESS:
+            return {
+                ...state,
+                products: {
+                    ...state.products,
+                    ...action.payload
+                },
+                shopHasLoaded: true
+            }
+        case ShopActionTypes.FETCH_PRODUCT_DATA_FAILURE:
+            return {
+                ...state,
+                shopHasLoaded: true,
+                error: action.payload
+            }
         default:
             return state;
     }

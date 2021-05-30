@@ -1,7 +1,9 @@
-
 import { Query, Field } from '@tilework/opus'
 
-export const CategoryDataQuery = (categoryName = "") => {
+// fetches product data based on category name
+// if category name is empty then fetches all product data
+export const CategoryDataQuery = (categoryName) => {
+    categoryName = categoryName === 'all' ? '' : categoryName
 
     return new Query('category')
         .addArgument('input', 'CategoryInput', { title: categoryName } )

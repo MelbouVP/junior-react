@@ -12,12 +12,15 @@ import Spinner from './Components/Spinners/spinner.component'
 import { selectCurrencyHasLoaded } from './Redux/currency/currency.selectors'
 import { fetchCurrenciesStart } from './Redux/currency/currency.actions'
 
+import { fetchProductDataStart } from './Redux/shop/shop.actions'
+
 import './App.css';
 export class App extends Component {
 
 
   componentDidMount() {
     this.props.fetchCurrenciesStart()
+    this.props.fetchProductDataStart()
   }
   
   render() {
@@ -41,7 +44,8 @@ export class App extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchCurrenciesStart: () => dispatch(fetchCurrenciesStart())
+  fetchCurrenciesStart: () => dispatch(fetchCurrenciesStart()),
+  fetchProductDataStart: () => dispatch(fetchProductDataStart())
 })
 
 const mapStateToProps = createStructuredSelector({
