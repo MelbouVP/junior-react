@@ -27,7 +27,7 @@ export class CurrencyOverlay extends Component {
             return currencyData
         })
 
-        const currencyListComponent = currencyList.map( (currency, index) =>
+        const currencyListComponents = currencyList.map( (currency, index) =>
                 <div key={index} className="currency" onClick={() => this.handleClick(currency)}>
                     <div className="currency__symbol">
                         { currency.symbol}
@@ -42,7 +42,7 @@ export class CurrencyOverlay extends Component {
             <div className="currency-overlay">
                 <div className="currency-overlay__content">
                     {
-                        currencyListComponent
+                        currencyListComponents
                     }
                 </div>
             </div>

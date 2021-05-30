@@ -12,7 +12,12 @@ export const selectShopHasLoaded = createSelector(
     shop => shop.shopHasLoaded
 )
 
-export const selectShopCategoryKeys = createSelector(
+export const selectShopCategoryNames = createSelector(
     [selectShop],
     shop => Object.keys(shop.products)
+)
+
+export const selectShopCategoryProducts = createSelector(
+    [selectShop],
+    shop => shop.products[shop.selectedCategory]
 )

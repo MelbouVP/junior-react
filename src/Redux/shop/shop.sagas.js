@@ -9,7 +9,7 @@ import {
     fetchProductDataFailure
 } from './shop.actions'
 
-import { selectSelectedCategory, selectShopCategoryKeys } from './shop.selectors'
+import { selectSelectedCategory, selectShopCategoryNames } from './shop.selectors'
 
 
 function* fetchProductData(){
@@ -17,7 +17,7 @@ function* fetchProductData(){
     try {
 
         const category = yield select(selectSelectedCategory)
-        const categories = yield select(selectShopCategoryKeys)
+        const categories = yield select(selectShopCategoryNames)
 
         if(categories.find(categoryName => categoryName === category)) return
 

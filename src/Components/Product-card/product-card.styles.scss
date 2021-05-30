@@ -1,0 +1,43 @@
+.product-card {
+    height: 22rem;
+    width: 20rem;
+    margin: 3rem 1.25rem;
+
+    .product-card__container {
+        height: 100%;
+
+        .product-card__image {
+            height: 85%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            
+            img {
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .product-card__overview {
+
+            .overview__product-name {
+                font-weight: 300;
+                font-size: 18px;
+                padding: 0.4rem 0;
+            }
+
+            .overview__product-price {
+                font-weight: 500;
+                font-size: 18px;
+
+                span {
+
+                    &:first-child {
+                        padding-right: .25rem;
+                    }
+                }
+            }
+        }
+    }
+}

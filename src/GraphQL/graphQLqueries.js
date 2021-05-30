@@ -10,9 +10,20 @@ export const CategoryDataQuery = (categoryName) => {
         .addField('name')
         .addField(
             new Field('products', true)
-            .addFieldList(['name', 'inStock'])
+            .addFieldList(['name', 'inStock', 'gallery', 'description', 'category'])
+            .addField(
+                new Field('attributes', true)
+                .addFieldList(['id', 'name','type'])
+                .addField(
+                    new Field('items', true)
+                    .addFieldList(['displayValue, value, id'])
+                )
+            )
+            .addField(
+                new Field('prices', true)
+                .addFieldList(['currency', 'amount'])
+            )
         )
 }
-
 
 export const CurrencyQuery = new Query('currencies')

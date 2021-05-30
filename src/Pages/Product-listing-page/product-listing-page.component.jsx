@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
+import ProductCard from '../../Components/Product-card/product-card.component'
 import Spinner from '../../Components/Spinners/spinner.component'
 
-import { selectSelectedCategory, selectShopHasLoaded } from '../../Redux/shop/shop.selectors'
+import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors'
+
+import { 
+    selectSelectedCategory, 
+    selectShopHasLoaded, 
+    selectShopCategoryProducts 
+} from '../../Redux/shop/shop.selectors'
 
 import './product-listing-page.styles.scss'
 
@@ -14,11 +21,22 @@ export class ProductListingPage extends Component {
 
     render() {
 
-        const { shopHasLoaded } = this.props
+        const { shopHasLoaded, categoryProducts, selectedCurrency } = this.props
         let { selectedCategory } = this.props
 
         // capitalize first letter
         selectedCategory = selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)
+
+        const productCardComponents = categoryProducts ? 
+            categoryProducts.map( (data,index) => 
+                <ProductCard 
+                    key={index} 
+                    productData={data} 
+                    selectedCurrency={selectedCurrency} 
+                />)
+        : 
+            null
+
 
         return (
             <div className="listing-page">
@@ -33,7 +51,9 @@ export class ProductListingPage extends Component {
                     <div className="listing-page__content">
                         {
                             shopHasLoaded ?
-                                <div>Shop data</div>
+
+                                productCardComponents
+                                
                             :
                                 <Spinner />
                         }
@@ -50,7 +70,9 @@ export class ProductListingPage extends Component {
 
 const mapStateToProps = createStructuredSelector({
     selectedCategory: selectSelectedCategory,
-    shopHasLoaded: selectShopHasLoaded
+    shopHasLoaded: selectShopHasLoaded,
+    categoryProducts: selectShopCategoryProducts,
+    selectedCurrency: selectSelectedCurrency
 })
 
 export default connect(mapStateToProps)(ProductListingPage)
