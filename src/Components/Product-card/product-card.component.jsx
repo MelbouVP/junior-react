@@ -1,21 +1,38 @@
 import React, { Component } from 'react'
 
+import { ReactComponent as CartIcon } from '../../Assets/Cart-icon.svg'
+
 import './product-card.styles.scss'
 
 export class ProductCard extends Component {
     render() {
-        const { name, InStock, prices, gallery, description, category, attributes } = this.props.productData
+        const { name, inStock, prices, gallery, description, category, attributes } = this.props.productData
         const { selectedCurrency } = this.props
 
         console.log(this.props)
 
-        if(!InStock) console.log('Out of stock:', name)
-
-        attributes.forEach(attribute => {
+        const swatchAttribute = attributes.filter(attribute => {
             if(attribute.type === 'swatch'){
-                console.log('Swatch attribute:', name)
+                return attribute
+            } else {
+                return false
             }
         })
+
+        const optionsComponents = swatchAttribute ? 
+            swatchAttribute.map( attribute => {
+                return attribute.items.map((item,index) => {
+                    return (
+                        <span 
+                            key={index} 
+                            className="dot" 
+                            style={{backgroundColor: item.value, border: '1px solid grey'}} 
+                        ></span>
+                    )
+                })
+            })
+        :
+            null
         
         const price = prices.find( price => price.currency === selectedCurrency.name )
 
@@ -26,11 +43,19 @@ export class ProductCard extends Component {
                         <img src={gallery[0]} alt="Product" />
                     </div>
                     <div className="product-card__overview">
-                        <h4 className="overview__product-name">
-                            {
-                                name
-                            }
-                        </h4>
+                        <div className="overview__product-header">
+                            <h4 className="overview__product-name">
+                                {
+                                    name
+                                }
+                            </h4>
+
+                            <div className="overview__product-options">
+                                {
+                                    optionsComponents
+                                }
+                            </div>
+                        </div>
                         <div className="overview__product-price">
                             <span>
                                 {
@@ -45,7 +70,22 @@ export class ProductCard extends Component {
                             </span>
                         </div>
                     </div>
+                    <div className="product-card__cart-icon">
+                        <CartIcon />
+                    </div>
                 </div>
+
+                {
+                    !inStock ?
+                        <div className="overlay__out-of-stock">
+                            <div>
+                                Out of stock
+                            </div>
+                        </div>
+                    :
+                        null
+                }
+
             </div>
         )
     }

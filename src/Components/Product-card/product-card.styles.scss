@@ -1,13 +1,20 @@
 .product-card {
-    height: 22rem;
+    z-index: 1;
+    position: relative;
+    height: 24rem;
     width: 20rem;
     margin: 3rem 1.25rem;
 
     .product-card__container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem;
         height: 100%;
 
         .product-card__image {
-            height: 85%;
+            height: 80%;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -21,10 +28,30 @@
 
         .product-card__overview {
 
-            .overview__product-name {
-                font-weight: 300;
-                font-size: 18px;
-                padding: 0.4rem 0;
+            .overview__product-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.5rem 0;
+
+                .overview__product-name {
+                    font-weight: 300;
+                    font-size: 18px;
+                }
+
+                .overview__product-options {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    span {
+                        height: 11px;
+                        width: 11px;
+                        border-radius: 50%;
+                        display: inline-block;
+                        margin: 0 .25rem;
+                    }
+                }
             }
 
             .overview__product-price {
@@ -38,6 +65,68 @@
                     }
                 }
             }
+        }
+
+        .product-card__cart-icon {
+            display: none;
+        }
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+
+            .product-card__cart-icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+
+                position: absolute;
+                right: 10%;
+                bottom: 17.5%;
+
+                background: #5ECE7B;
+                height: 2.5rem;
+                width: 2.5rem;
+                border-radius: 50%;
+                
+
+                svg {
+                    height: 1.25rem;
+                    width: 1.25rem;
+                    path {
+                        fill: #fff;
+                    }
+                }
+
+                &:hover {
+                    background: #1cc74a;
+                }
+            }
+        }
+    }
+
+
+    .overlay__out-of-stock {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #FFFFFF;
+        opacity: 0.5;
+        z-index:5;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        div {
+            height: 25%;
+            text-transform: uppercase;
+            font-weight: 400;
+            size: 24px;
+            color: #8D8F9A;
         }
     }
 }
