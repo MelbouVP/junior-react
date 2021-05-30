@@ -3,6 +3,7 @@ import ShopActionTypes from './shop.types'
 export const INITIAL_STATE = {
     products: {},
     selectedCategory: 'clothes',
+    selectedProduct: null,
     shopHasLoaded: true,
     error: null
 }
@@ -13,6 +14,11 @@ const shopReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 selectedCategory: action.payload
+            }
+        case ShopActionTypes.CHANGE_SELECTED_PRODUCT:
+            return {
+                ...state,
+                selectedProduct: action.payload
             }
         case ShopActionTypes.FETCH_PRODUCT_DATA_START:
             return {

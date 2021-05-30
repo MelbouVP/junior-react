@@ -6,6 +6,8 @@ import { createStructuredSelector } from 'reselect'
 import ProductCard from '../../Components/Product-card/product-card.component'
 import Spinner from '../../Components/Spinners/spinner.component'
 
+import { changeSelectedProduct } from '../../Redux/shop/shop.actions'
+
 import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors'
 
 import { 
@@ -18,8 +20,10 @@ import './product-listing-page.styles.scss'
 
 export class ProductListingPage extends Component {
 
-    handleRedirect = (productName) => {
-        history.push(`/product/${productName}`)
+    handleRedirect = (product) => {
+
+        this.props.changeSelectedProduct(product)
+        history.push(`/product/${product.name}`)
     }
 
     handleCartItem = () => {
@@ -73,9 +77,9 @@ export class ProductListingPage extends Component {
     }
 }
 
-// const mapDispatchToProps = dispatch => ({
-
-// })
+const mapDispatchToProps = dispatch => ({
+    changeSelectedProduct: (product) => dispatch(changeSelectedProduct(product))
+})
 
 const mapStateToProps = createStructuredSelector({
     selectedCategory: selectSelectedCategory,
@@ -84,4 +88,4 @@ const mapStateToProps = createStructuredSelector({
     selectedCurrency: selectSelectedCurrency
 })
 
-export default connect(mapStateToProps)(ProductListingPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductListingPage)

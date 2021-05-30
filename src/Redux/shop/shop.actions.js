@@ -5,6 +5,11 @@ export const changeSelectedCategory = (categoryName) => ({
     payload: categoryName
 })
 
+export const changeSelectedProduct = (product) => ({
+    type: ShopActionTypes.CHANGE_SELECTED_PRODUCT,
+    payload: product
+})
+
 export const fetchProductDataStart = () => ({
     type: ShopActionTypes.FETCH_PRODUCT_DATA_START
 })

@@ -7,6 +7,11 @@ export const selectSelectedCategory = createSelector(
     shop => shop.selectedCategory
 )
 
+export const selectSelectedProduct = createSelector(
+    [selectShop],
+    shop => shop.selectedProduct
+)
+
 export const selectShopHasLoaded = createSelector(
     [selectShop],
     shop => shop.shopHasLoaded

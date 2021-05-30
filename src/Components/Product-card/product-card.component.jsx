@@ -38,7 +38,7 @@ export class ProductCard extends Component {
 
         return (
             <div className="product-card">
-                <div className="product-card__container" onClick={() => handleRedirect(name)}>
+                <div className="product-card__container" onClick={() => handleRedirect(this.props.productData)}>
                     <div className="product-card__image">
                         <img src={gallery[0]} alt="Product" />
                     </div>

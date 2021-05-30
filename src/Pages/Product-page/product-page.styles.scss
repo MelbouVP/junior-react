@@ -1,0 +1,118 @@
+
+.product-page {
+    padding: 4rem;
+
+    .product-page__container {
+        display: flex;
+        width: 100%;
+
+        .product-page__images {
+            display: flex;
+            height: 90vh;
+            width: 60%;
+
+            .images__main-image {
+                order: 2;
+
+                img {
+                    object-fit: contain;
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+
+            .images__accessory-images {
+                order: 1;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                
+                .accessory-image {
+                    height: 6rem;
+                    width: 6rem;
+
+                    img {
+                        object-fit: cover;
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+
+            }
+        }
+
+        .product-page__content {
+            display: flex;
+            flex-direction: column;
+
+            width: 40%;
+
+            .product-page__header {
+                padding-bottom: 3rem;
+
+                h1 {
+                    font-weight: 600;
+                    font-size: 30px;
+                }
+            }
+
+            .product-page__attributes {
+                padding-bottom: 4rem;
+                
+                h4 {
+                    font-family: 'Roboto Condensed', sans-serif;
+                    text-transform: uppercase;
+                    font-size: 18px;
+                }
+
+                
+            }
+
+            .product-page__price {
+                padding-bottom: 4rem;
+
+                h4 {
+                    padding: 1rem 0;
+                    font-family: 'Roboto Condensed', sans-serif;
+                    text-transform: uppercase;
+                    font-size: 18px;
+                }
+
+                span {
+                    font-weight: 700;
+                    font-size: 24px;
+
+                    &:first-child {
+                        padding-right: .25rem;
+                    }
+                }
+            }
+
+            .product-page__cart {
+                padding-bottom: 3rem;
+
+                .cart__button {
+                    background: #5ECE7B;
+                    color: white;
+                    width: 15rem;
+                    height: 3rem;
+                    border: none;
+
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    font-size: 16px;
+                    
+                }
+            }
+
+            .product-page__description {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 400;
+                line-height: 25.5px;
+                width: 70%;
+            }
+        }
+
+    }
+}
