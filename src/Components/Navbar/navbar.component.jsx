@@ -13,7 +13,11 @@ import { toggleCartOverlay } from '../../Redux/cart/cart.actions';
 import { selectCartOverlayHidden } from '../../Redux/cart/cart.selectors'
 
 import { toggleCurrencyOverlay } from '../../Redux/currency/currency.actions';
-import { selectCurrencyOverlayHidden } from '../../Redux/currency/currency.selectors'
+import { 
+    selectCurrencyOverlayHidden, 
+    selectCurrencies,
+    selectSelectedCurrency
+} from '../../Redux/currency/currency.selectors'
 
 import './navbar.styles.scss'
 
@@ -43,8 +47,9 @@ export class Navbar extends Component {
 
     render() {
 
-        const { currencyOverlayHidden, cartOverlayHidden } = this.props
+        const { currencyOverlayHidden, cartOverlayHidden, selectedCurrency } = this.props
 
+        
         return (
             <nav className="navigation">
                 <div className="navigation__navbar">
@@ -68,7 +73,9 @@ export class Navbar extends Component {
                             onClick={this.handleCurrencyOverlay}
                         >
                             <div className="currency">
-                                $
+                                {
+                                    selectedCurrency.symbol
+                                }
                             </div>
                             <div className="chevron-up"></div>
                         </div>
@@ -114,7 +121,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = createStructuredSelector({
     cartOverlayHidden: selectCartOverlayHidden,
-    currencyOverlayHidden: selectCurrencyOverlayHidden
+    currencyOverlayHidden: selectCurrencyOverlayHidden,
+    selectedCurrency: selectSelectedCurrency
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

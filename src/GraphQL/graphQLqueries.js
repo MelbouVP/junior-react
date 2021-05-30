@@ -11,3 +11,6 @@ export const CategoryDataQuery = (categoryName = "") => {
             .addFieldList(['name', 'inStock'])
         )
 }
+
+
+export const CurrencyQuery = new Query('currencies')

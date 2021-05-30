@@ -5,6 +5,7 @@ import './currency-overlay.styles.scss'
 
 export class CurrencyOverlay extends Component {
     render() {
+        console.log('currency-overlay rendered')
         return (
             <div className="currency-overlay">
                 <div className="currency-overlay__content">

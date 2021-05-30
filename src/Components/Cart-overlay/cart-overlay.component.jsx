@@ -5,6 +5,7 @@ import './cart-overlay.styles.scss'
 
 export class CartOverlay extends Component {
     render() {
+        
         return (
             <div className="cart-overlay">
                 <div className="cart-overlay__content">

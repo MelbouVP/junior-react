@@ -2,7 +2,8 @@ import ShopActionTypes from './shop.types'
 
 export const INITIAL_STATE = {
     products: {},
-    selectedCategory: '',
+    selectedCategory: 'Clothes',
+    hasLoaded: true,
     error: null
 }
 
