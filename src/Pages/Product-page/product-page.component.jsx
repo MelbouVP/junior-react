@@ -7,6 +7,8 @@ import { selectSelectedProduct } from '../../Redux/shop/shop.selectors'
 
 import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors'
 
+import ProductAttribute from '../../Components/Product-attribute/product-attribute.component'
+
 import './product-page.styles.scss'
 export class ProductPage extends Component {
 
@@ -36,11 +38,10 @@ export class ProductPage extends Component {
             null
 
         const attributeList = attributes ? 
-            attributes.map(attribute => attribute)
+            attributes.map(attribute => <ProductAttribute attribute={attribute} />)
         : 
             null
         
-        console.log(attributeList)
             
         return (
             <div className="product-page">
@@ -72,10 +73,9 @@ export class ProductPage extends Component {
                                 </div>
 
                                 <div className="product-page__attributes">
-                                    <h4>size:</h4>
-                                    <div className="attributes__content">
-
-                                    </div>
+                                    {
+                                        attributeList
+                                    }
                                 </div>
 
                                 <div className="product-page__price">
