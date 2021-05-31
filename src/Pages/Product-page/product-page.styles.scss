@@ -96,7 +96,12 @@
                     font-weight: 600;
                     font-size: 16px;
                     
+                    &:hover {
+                        cursor: pointer;
+                        background: #1cc74a;
+                    }
                 }
+
             }
 
             .product-page__description {

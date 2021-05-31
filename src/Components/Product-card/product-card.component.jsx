@@ -9,8 +9,6 @@ export class ProductCard extends Component {
         const { name, inStock, prices, gallery, attributes } = this.props.productData
         const { selectedCurrency, handleRedirect, handleCartItem } = this.props
 
-        console.log(this.props)
-
         const swatchAttribute = attributes.filter(attribute => {
             if(attribute.type === 'swatch'){
                 return attribute

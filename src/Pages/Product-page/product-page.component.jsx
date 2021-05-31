@@ -11,20 +11,41 @@ import ProductAttribute from '../../Components/Product-attribute/product-attribu
 
 import './product-page.styles.scss'
 export class ProductPage extends Component {
+    constructor(props){
+        super(props)
+
+        this.state = {}
+    }
 
     componentDidMount(){
 
         if(!this.props.selectedProduct) history.push('/')
     }
 
+    getSelectedAttributes = (value, attributeName) => {
+        this.setState( prevState => {
+            return {
+                ...prevState,
+                [attributeName]: value
+            }
+        })
+    }
+
+    handleCartItem = (e) => {
+        e.preventDefault()
+        
+        console.log('added')
+
+    }
+
     render() {
         const { name, prices, gallery, description, attributes } = this.props.selectedProduct || {}
-
+        console.log(this.state)
         // skip first image since it is main image
         const imageComponents = gallery ? 
             gallery.slice(1).map(
-                (image) =>
-                    <div className="accessory-image">
+                (image,index) =>
+                    <div className="accessory-image" key={index}>
                         <img src={image} alt="Product" />
                     </div> 
             )
@@ -38,13 +59,19 @@ export class ProductPage extends Component {
             null
 
         const attributeList = attributes ? 
-            attributes.map(attribute => <ProductAttribute attribute={attribute} />)
+            attributes.map( (attribute,index) => 
+                <ProductAttribute 
+                    key={index}
+                    attribute={attribute} 
+                    sendSelectedAttributes={this.getSelectedAttributes}
+                />
+            )
         : 
             null
         
             
         return (
-            <div className="product-page">
+            <div className="product-page" >
                 {
                     this.props.selectedProduct ?
                         <div className="product-page__container">
@@ -62,7 +89,7 @@ export class ProductPage extends Component {
                                 </div>
                             </div>
 
-                            <div className="product-page__content">
+                            <form className="product-page__content" onSubmit={this.handleCartItem}>
 
                                 <div className="product-page__header">
                                     <h1>
@@ -93,8 +120,8 @@ export class ProductPage extends Component {
                                     </span>
                                 </div>
 
-                                <div className="product-page__cart">
-                                    <button className="cart__button">
+                                <div className="product-page__cart" >
+                                    <button type='submit' className="cart__button">
                                        add to cart
                                     </button>
                                 </div>
@@ -105,7 +132,7 @@ export class ProductPage extends Component {
                                     }
                                 </div>
 
-                            </div>
+                            </form>
 
                         </div>
                     :

@@ -21,8 +21,7 @@
         
         // selects all options__ classes except for options__colors
         [class^="options__"]:not([class*="colors"]) { 
-            display: flex;
-            justify-content: center;
+            
 
             input[type=radio] {
                 display: none;
@@ -56,8 +55,7 @@
         }
 
         .options__colors {
-            display: flex;
-            justify-content: center;
+            
 
             label {
                 
