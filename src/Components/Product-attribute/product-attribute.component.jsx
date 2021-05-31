@@ -15,17 +15,13 @@ export class ProductAttribute extends Component {
         if(this.props.attribute){
 
             let attributeName = this.sanitizeVariable(this.props.attribute.name)
-
-            this.setState((prevState) => {
+            this.setState( () => {
                 return {
-                    ...prevState,
                     [attributeName]: this.props.attribute.items[1].value
                 }
-                
-              }
-            )
+            })
 
-            this.props.sendSelectedAttributes(this.props.attribute.items[1].value, attributeName)
+            this.props.sendChosenAttributes(this.props.attribute.items[1].value, attributeName)
         }
     }
 
@@ -35,15 +31,13 @@ export class ProductAttribute extends Component {
 
     handleChange = (value, attributeName) => {
         
-        this.setState( prevState => {
+        this.setState( () => {
             return {
-                ...prevState,
                 [attributeName]: value
             }
         })
 
-        this.props.sendSelectedAttributes(value, attributeName)
-
+        this.props.sendChosenAttributes(value, attributeName)
     }
 
     render() {

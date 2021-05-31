@@ -3,18 +3,22 @@ import history from '../../history'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { selectSelectedProduct } from '../../Redux/shop/shop.selectors'
-
-import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors'
-
 import ProductAttribute from '../../Components/Product-attribute/product-attribute.component'
+
+
+import { selectSelectedProduct } from '../../Redux/shop/shop.selectors'
+import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors'
+import { addItem } from '../../Redux/cart/cart.actions'
+
 
 import './product-page.styles.scss'
 export class ProductPage extends Component {
     constructor(props){
         super(props)
 
-        this.state = {}
+        this.state = {
+            chosenAttributes: []
+        }
     }
 
     componentDidMount(){
@@ -22,26 +26,80 @@ export class ProductPage extends Component {
         if(!this.props.selectedProduct) history.push('/')
     }
 
-    getSelectedAttributes = (value, attributeName) => {
+    getChosenAttributes = (value, attributeName) => {
+        
         this.setState( prevState => {
-            return {
-                ...prevState,
-                [attributeName]: value
+
+            let attributeExists = prevState.chosenAttributes.find( attribute => attribute.name === attributeName)
+
+            if(attributeExists) {
+                let updatedAttributes = prevState.chosenAttributes
+                    .map(attribute => {                    
+                        if(attribute.name === attributeName){
+                            attribute.value = value
+                            return attribute
+                        } else {
+                            return attribute
+                        }
+                })
+
+                return {
+                    chosenAttributes: updatedAttributes
+                }
+
+            } else {
+
+                return {
+                    chosenAttributes: [
+                        ...prevState.chosenAttributes,
+                        {
+                            name: attributeName,
+                            value
+                        }
+                ]}
             }
+
         })
     }
 
-    handleCartItem = (e) => {
-        e.preventDefault()
-        
-        console.log('added')
+    createAttributesKey = (attributes) => {
+        return attributes.map( attribute => {
 
+            let attributeKey = `${attribute.name.slice(2)}+${attribute.value.slice(0)}`
+            
+            return attributeKey
+        }).join('')
+    }
+
+    handleCartItem = (e,name, prices, gallery, attributes) => {
+        e.preventDefault()
+        const { chosenAttributes } = this.state
+
+        let attributesKey = this.createAttributesKey(chosenAttributes)
+
+        let selectedAttributes = []
+        chosenAttributes.forEach( attribute => {
+            let obj = {}
+            obj.name = attribute.name
+            obj.value = attribute.value
+            selectedAttributes.push(obj)
+        })
+
+        let product = {
+            name,
+            prices,
+            gallery,
+            attributes,
+            selectedAttributes,
+            selectedAttributesID: attributesKey
+        }
+    
+        this.props.addItem(product)
     }
 
     render() {
         const { name, prices, gallery, description, attributes } = this.props.selectedProduct || {}
-        console.log(this.state)
-        // skip first image since it is main image
+
         const imageComponents = gallery ? 
             gallery.slice(1).map(
                 (image,index) =>
@@ -63,7 +121,7 @@ export class ProductPage extends Component {
                 <ProductAttribute 
                     key={index}
                     attribute={attribute} 
-                    sendSelectedAttributes={this.getSelectedAttributes}
+                    sendChosenAttributes={this.getChosenAttributes}
                 />
             )
         : 
@@ -89,7 +147,10 @@ export class ProductPage extends Component {
                                 </div>
                             </div>
 
-                            <form className="product-page__content" onSubmit={this.handleCartItem}>
+                            <form 
+                                className="product-page__content" 
+                                onSubmit={(e) => this.handleCartItem(e,name, prices, gallery, attributes)}
+                            >
 
                                 <div className="product-page__header">
                                     <h1>
@@ -99,11 +160,16 @@ export class ProductPage extends Component {
                                     </h1>
                                 </div>
 
-                                <div className="product-page__attributes">
-                                    {
-                                        attributeList
-                                    }
-                                </div>
+                                {
+                                    attributeList.length ? 
+                                        <div className="product-page__attributes">
+                                            {
+                                                attributeList
+                                            }
+                                        </div>
+                                    :
+                                        null
+                                }
 
                                 <div className="product-page__price">
                                     <h4>price:</h4>
@@ -143,10 +209,14 @@ export class ProductPage extends Component {
     }
 }
 
+const mapDispatchToProps = dispatch => ({
+    addItem: (product) => dispatch(addItem(product))
+})
+
 
 const mapStateToProps = createStructuredSelector({
     selectedProduct: selectSelectedProduct,
     selectedCurrency: selectSelectedCurrency
 })
 
-export default connect(mapStateToProps)(ProductPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage)
