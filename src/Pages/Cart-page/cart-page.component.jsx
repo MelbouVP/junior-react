@@ -5,15 +5,58 @@ import { createStructuredSelector } from 'reselect'
 import { selectCartItems } from '../../Redux/cart/cart.selectors.js'
 import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors.js'
 
+import { changeCartItemAttribute } from '../../Redux/cart/cart.actions'
+
 
 import CartCard from '../../Components/Cart-card/cart-card.component'
 
 import './cart-page.styles.scss'
 
 export class CartPage extends Component {
+
+
+    createAttributesKey = (attributes) => {
+
+        return attributes.map( attribute => {
+
+            let attributeKey = ''
+
+            for(let i = 0; i < attribute.name.length; i += 4){
+                attributeKey += attribute.name[i]
+            }
+
+            for(let i = 0; i < attribute.value.length; i++){
+                attributeKey += attribute.value[i]
+            }
+            
+            return attributeKey
+        })
+        .join('')
+
+
+    }
+
+
+    changeSelectedAttribute = (productName, attributes) => {
+
+        let newAttributeKey = this.createAttributesKey(attributes)
+
+        this.props.changeCartItemAttribute({name: productName, attributes, newAttributeKey})
+
+    }
+
     render() {
         const { cartItems } = this.props
         const { selectedCurrency } = this.props
+
+        let cartTotal = cartItems.length ? cartItems.reduce((accumulator, currentValue) => {
+                
+                let currency = currentValue.prices.find( price => price.currency === selectedCurrency.name)
+                return (accumulator + (currency.amount*currentValue.quantity)).toFixed(2)
+
+            },0)
+        :
+            null
 
         const cartItemComponents = cartItems.length ?
             cartItems.map( (cartItem,index) => 
@@ -21,6 +64,7 @@ export class CartPage extends Component {
                     key={index} 
                     cartItem={cartItem} 
                     selectedCurrency={selectedCurrency}
+                    handleChangedAttribute={this.changeSelectedAttribute}
                 /> 
             )
         :
@@ -36,9 +80,42 @@ export class CartPage extends Component {
                         </h1>
                     </div>
                     <div className="cart-page__content">
+                        
+
                         {
-                            cartItemComponents
+                            cartItems.length ?
+                                cartItemComponents
+                            :
+                                <div className="cart-page__cart-empty"> Cart is empty</div>
                         }
+
+                    </div>
+
+                    <div className="cart-page__cart-total">
+                        
+                        {
+                            cartItems.length ?
+                                <>
+                                    <h4>Total:</h4>
+
+                                    <div>
+                                        <span>
+                                            {
+                                                this.props.selectedCurrency.symbol
+                                            } 
+                                        </span>
+
+                                        <span>
+                                            {
+                                                cartTotal
+                                            }
+                                        </span>
+                                    </div>
+                                </>
+                            :
+                                null
+                        }
+
                     </div>
                 </div>
             </div>
@@ -47,7 +124,7 @@ export class CartPage extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-
+    changeCartItemAttribute: (newAttributeData) => dispatch(changeCartItemAttribute(newAttributeData))
 })
 
 const mapStateToProps = createStructuredSelector({

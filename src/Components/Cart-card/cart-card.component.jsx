@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+
 
 import ProductAttribute from '../Product-attribute/product-attribute.component'
 
 import './cart-card.component.scss'
+import { incrementItem, decrementItem } from '../../Redux/cart/cart.actions'
 
 export class CartCard extends Component {
     constructor(props){
@@ -15,9 +19,8 @@ export class CartCard extends Component {
 
     componentDidMount(){
         this.setState( prevState => ({
-
-            ...prevState,
-            chosenAttributes: this.props.cartItem.selectedAttributes
+                ...prevState,
+                chosenAttributes: this.props.cartItem.selectedAttributes
             })
         )
     }
@@ -39,11 +42,22 @@ export class CartCard extends Component {
                         }
                 })
 
+                this.props.handleChangedAttribute(this.props.cartItem.name, updatedAttributes)
+
                 return {
                     chosenAttributes: updatedAttributes
                 }
 
             } else {
+
+                this.props.handleChangedAttribute(this.props.cartItem.name, {
+                    chosenAttributes: [
+                        ...prevState.chosenAttributes,
+                        {
+                            name: attributeName,
+                            value
+                        }
+                ]})
 
                 return {
                     chosenAttributes: [
@@ -58,6 +72,13 @@ export class CartCard extends Component {
         })
     }
 
+    handleIncrement = () => {
+        this.props.incrementItem(this.props.cartItem)
+    }
+
+    handleDecrement = () => {
+        this.props.decrementItem(this.props.cartItem)
+    }
 
 
     render() {
@@ -120,7 +141,7 @@ export class CartCard extends Component {
 
                     <div className="cart-card__item--quantity">
                             
-                        <button className="item-quantity__increment">
+                        <button className="item-quantity__increment" onClick={this.handleIncrement}>
                         </button>
 
                         <div className="item-quantity__quantity">
@@ -129,7 +150,7 @@ export class CartCard extends Component {
                             }
                         </div>
 
-                        <button className="item-quantity__decrement">
+                        <button className="item-quantity__decrement" onClick={this.handleDecrement}>
                         </button>
 
                     </div>
@@ -145,4 +166,14 @@ export class CartCard extends Component {
     }
 }
 
-export default React.memo(CartCard)
+const mapDispatchToProps = dispatch => ({
+    incrementItem: (item) => dispatch(incrementItem(item)),
+    decrementItem: (item) => dispatch(decrementItem(item))
+})
+
+
+const mapStateToProps = createStructuredSelector({
+    
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(CartCard))

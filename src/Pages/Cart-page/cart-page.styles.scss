@@ -17,6 +17,21 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+
+
+            .cart-page__cart-empty {
+                font-size: 28px;
+            }
+        }
+
+        .cart-page__cart-total {
+
+            padding: 3rem 5rem;
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 2rem;
+            font-weight: 700;
         }
     }
 }

@@ -23,7 +23,7 @@
         [class^="options__"]:not([class*="colors"]) { 
             
 
-            input[type=checkbox] {
+            input[type=radio] {
                 display: none;
             }
     
@@ -58,7 +58,7 @@
             
             label {
                                     
-                input[type=checkbox] {
+                input[type=radio] {
 
                     height: 2rem;
                     width: 2rem;
@@ -91,7 +91,7 @@
 
             .color__options--green {
 
-                input[type=checkbox] {
+                input[type=radio] {
 
                     &:after {
                         background-color: #44FF03;
@@ -110,7 +110,7 @@
 
             .color__options--cyan {
 
-                input[type=checkbox] {
+                input[type=radio] {
 
                     &:after {
                         background-color: #03FFF7;
@@ -129,7 +129,7 @@
 
             .color__options--blue {
 
-                input[type=checkbox] {
+                input[type=radio] {
 
                     &:after {
                         background-color: #030BFF;
@@ -148,7 +148,7 @@
 
             .color__options--black {
 
-                input[type=checkbox] {
+                input[type=radio] {
 
                     &:after {
                         background-color: #000000;
@@ -167,7 +167,7 @@
 
             .color__options--white {
 
-                input[type=checkbox] {
+                input[type=radio] {
 
                     &:after {
                         background-color: #FFFFFF;

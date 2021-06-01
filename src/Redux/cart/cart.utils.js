@@ -1,5 +1,7 @@
 export const addItemToCart = (cartItems, cartItemToAdd) => {
 
+    console.log(cartItems, cartItemToAdd)
+
     const existingCartItem = cartItems.find(cartItem => 
         cartItem.name === cartItemToAdd.name
     )
@@ -70,6 +72,26 @@ export const decrementItem = (cartItems, cartItemToDecrement) => {
             cartItem.selectedAttributesID === cartItemToDecrement.selectedAttributesID
         ) {
             return {...cartItem, quantity: cartItem.quantity - 1}
+        } else {
+            return cartItem
+        }
+    })
+}
+
+export const changeCartItemAttribute = (cartItems, cartItemToChange) => {
+    const existingCartItem = cartItems.find(cartItem => 
+        cartItem.name === cartItemToChange.name
+    )
+
+    return cartItems.map( cartItem => {
+
+        if(cartItem.name === existingCartItem.name){
+            return {
+                ...existingCartItem, 
+                selectedAttributes: cartItemToChange.attributes,
+                selectedAttributesID: cartItemToChange.newAttributeKey,
+                quantity: 1
+            }
         } else {
             return cartItem
         }

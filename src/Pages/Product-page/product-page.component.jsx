@@ -65,12 +65,21 @@ export class ProductPage extends Component {
     }
 
     createAttributesKey = (attributes) => {
+        
         return attributes.map( attribute => {
+            let attributeKey = ''
 
-            let attributeKey = `${attribute.name.slice(2)}+${attribute.value.slice(0)}`
+            for(let i = 0; i < attribute.name.length; i += 4){
+                attributeKey += attribute.name[i]
+            }
+
+            for(let i = 0; i < attribute.value.length; i++){
+                attributeKey += attribute.value[i]
+            }
             
             return attributeKey
-        }).join('')
+        })
+        .join('')
     }
 
     handleCartItem = (e,name, prices, gallery, attributes) => {

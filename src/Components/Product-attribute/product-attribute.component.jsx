@@ -67,7 +67,6 @@ export class ProductAttribute extends Component {
                     <div className="options__colors" key={index}>
                         {
                             attribute.items.map( (attributeItem,index) => {
-                                // console.log(this.state[`${product}+${attributeName}`], " ", attributeItem.value)
                                 return (
                                     <label 
                                         htmlFor={`${product}-${attributeItem.id}`}
@@ -75,12 +74,12 @@ export class ProductAttribute extends Component {
                                         key={index}
                                     >
                                         <input 
-                                            type="checkbox" 
-                                            name={attribute.name} 
-                                            id={`${product}-${attributeItem.id}`}
+                                            type="radio" 
+                                            name={`${product}-${attribute.name}-${attributeItem.id}`} 
+                                            id={`${product}-${attribute.name}-${attributeItem.id}`}
                                             value={attributeItem.id}
                                             checked={this.state[attributeName] === attributeItem.value}
-                                            onChange={() => this.handleChange(attributeItem.value, attributeName, product)}
+                                            onChange={() => this.handleChange(attributeItem.value, attributeName)}
                                         />
                                     </label>
                                 )
@@ -103,12 +102,12 @@ export class ProductAttribute extends Component {
                                         key={index}
                                     >
                                         <input 
-                                            type="checkbox" 
-                                            name={attribute.name} 
+                                            type="radio" 
+                                            name={`${product}-${attribute.name}-${attributeItem.id}`}
                                             id={`${product}-${attribute.name}-${attributeItem.id}`}
                                             value={attributeItem.id}
                                             checked={this.state[attributeName] === attributeItem.value}
-                                            onChange={(e) => this.handleChange(attributeItem.value, attributeName, product)}
+                                            onChange={(e) => this.handleChange(attributeItem.value, attributeName)}
                                         />
                                         <span>
                                             {

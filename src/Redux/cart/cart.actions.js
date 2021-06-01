@@ -23,3 +23,8 @@ export const decrementItem = (item) => ({
     type: CartActionTypes.DECREMENT_ITEM,
     payload: item
 })
+
+export const changeCartItemAttribute = (newAttributeData) => ({
+    type: CartActionTypes.CHANGE_CART_ITEM_ATTRIBUTE,
+    payload: newAttributeData
+})
