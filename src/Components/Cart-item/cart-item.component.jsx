@@ -6,9 +6,9 @@ import { incrementItem, decrementItem } from '../../Redux/cart/cart.actions'
 
 import ProductAttribute from '../Product-attribute/product-attribute.component'
 
-import './cart-card.styles.scss'
+import './cart-item.styles.scss'
 
-export class CartCard extends Component {
+export class CartItem extends Component {
     constructor(props){
         super(props)
 
@@ -186,4 +186,4 @@ const mapStateToProps = createStructuredSelector({
     
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(CartCard))
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem)

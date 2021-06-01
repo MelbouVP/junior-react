@@ -12,7 +12,7 @@ import {
     changeCartItemAttribute
  } from '../../Redux/cart/cart.actions'
 
-import CartOverlayCard from '../Cart-overlay-card/cart-overlay-card.component'
+import CartOverlayItem from '../Cart-overlay-item/cart-overlay-item.component'
 
 import './cart-overlay.styles.scss'
 
@@ -65,7 +65,7 @@ export class CartOverlay extends Component {
 
         const cartOverlayItemComponents = cartItems ?
             cartItems.map((item, index) => 
-                <CartOverlayCard
+                <CartOverlayItem
                     key={`${index}-${item.name}`}
                     cartItem={item}
                     selectedCurrency={selectedCurrency}

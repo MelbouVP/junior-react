@@ -6,9 +6,9 @@ import { incrementItem, decrementItem } from '../../Redux/cart/cart.actions'
 
 import ProductAttribute from '../Product-attribute/product-attribute.component'
 
-import './cart-overlay-card.styles.scss'
+import './cart-overlay-item.styles.scss'
 
-export class CartOverlayCard extends Component {
+export class CartOverlayItem extends Component {
     constructor(props){
         super(props)
 
@@ -180,4 +180,4 @@ const mapStateToProps = createStructuredSelector({
     
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartOverlayCard)
+export default connect(mapStateToProps, mapDispatchToProps)(CartOverlayItem)
