@@ -12,12 +12,23 @@ export class ProductAttribute extends Component {
 
     componentDidMount() {
 
-        if(this.props.attribute){
+        const { selectedAttribute, attribute } = this.props
 
-            let attributeName = this.sanitizeVariable(this.props.attribute.name)
+        if(selectedAttribute){
+
             this.setState( () => {
                 return {
-                    [attributeName]: this.props.attribute.items[1].value
+                    [selectedAttribute.name]:selectedAttribute.value
+
+                }
+            })
+            
+        } else {
+            let attributeName = this.sanitizeVariable(attribute.name)
+
+            this.setState( () => {
+                return {
+                    [attributeName]: attribute.items[1].value
                 }
             })
 
@@ -32,20 +43,23 @@ export class ProductAttribute extends Component {
     handleChange = (value, attributeName) => {
         
         this.setState( () => {
+            
             return {
                 [attributeName]: value
             }
         })
-
+ 
         this.props.sendChosenAttributes(value, attributeName)
+
     }
 
     render() {
-        const { attribute } = this.props
-
+        const { attribute, productName } = this.props
+        
         const attributeLabelComponents = [attribute].map( (attribute,index) => {
-
+            
             let attributeName = this.sanitizeVariable(attribute.name)
+            let product = this.sanitizeVariable(productName)
 
             if(attribute.type === 'swatch'){
 
@@ -53,20 +67,20 @@ export class ProductAttribute extends Component {
                     <div className="options__colors" key={index}>
                         {
                             attribute.items.map( (attributeItem,index) => {
-                                
+                                // console.log(this.state[`${product}+${attributeName}`], " ", attributeItem.value)
                                 return (
                                     <label 
-                                        htmlFor={attributeItem.id} 
+                                        htmlFor={`${product}-${attributeItem.id}`}
                                         className={`color__options--${attributeItem.id.toLowerCase()}`}
                                         key={index}
                                     >
                                         <input 
-                                            type="radio" 
+                                            type="checkbox" 
                                             name={attribute.name} 
-                                            id={attributeItem.id}
+                                            id={`${product}-${attributeItem.id}`}
                                             value={attributeItem.id}
                                             checked={this.state[attributeName] === attributeItem.value}
-                                            onChange={() => this.handleChange(attributeItem.value, attributeName)}
+                                            onChange={() => this.handleChange(attributeItem.value, attributeName, product)}
                                         />
                                     </label>
                                 )
@@ -79,22 +93,22 @@ export class ProductAttribute extends Component {
 
                 return (
                     // provide class name that corresponds to product option name
-                    <div className={`options__${attributeName}`} key={index}>
+                    <div className={`options__${product}`} key={index}>
                         {
                             attribute.items.map( (attributeItem,index) => {
                                 
                                 return (
                                     <label 
-                                        htmlFor={`${attribute.name}-${attributeItem.id}`}
+                                        htmlFor={`${product}-${attribute.name}-${attributeItem.id}`}
                                         key={index}
                                     >
                                         <input 
-                                            type="radio" 
+                                            type="checkbox" 
                                             name={attribute.name} 
-                                            id={`${attribute.name}-${attributeItem.id}`}
+                                            id={`${product}-${attribute.name}-${attributeItem.id}`}
                                             value={attributeItem.id}
                                             checked={this.state[attributeName] === attributeItem.value}
-                                            onChange={(e) => this.handleChange(attributeItem.value, attributeName)}
+                                            onChange={(e) => this.handleChange(attributeItem.value, attributeName, product)}
                                         />
                                         <span>
                                             {

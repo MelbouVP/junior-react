@@ -27,6 +27,8 @@ export class ProductPage extends Component {
     }
 
     getChosenAttributes = (value, attributeName) => {
+
+        console.log(attributeName)
         
         this.setState( prevState => {
 
@@ -90,7 +92,7 @@ export class ProductPage extends Component {
             prices,
             gallery,
             attributes,
-            selectedAttributes,
+            selectedAttributes: chosenAttributes,
             selectedAttributesID: attributesKey
         }
     
@@ -121,6 +123,7 @@ export class ProductPage extends Component {
                 <ProductAttribute 
                     key={index}
                     attribute={attribute} 
+                    productName={name}
                     sendChosenAttributes={this.getChosenAttributes}
                 />
             )

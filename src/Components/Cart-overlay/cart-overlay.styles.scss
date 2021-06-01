@@ -1,5 +1,6 @@
 
 .cart-overlay {
+    padding: 1rem;
     position: absolute;
     top: 3.25rem;
     right: 0;
@@ -7,12 +8,61 @@
     width: 325px;
     box-shadow: 1px 1px 5px black;
     background: white;
+    z-index:100;
 
     .cart-overlay__content {
         
 
         .content__header {
             padding: 1rem;
+        }
+
+        .content__cart-items {
+
+        }
+
+        .content__action-buttons {
+
+            display: flex;
+            justify-content: space-between;
+
+            .content__action {
+
+                .action-button {
+                    width: 9rem;
+                    height: 3rem;
+                    border: none;
+
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    font-style: normal;
+                    font-size: 14px;
+                    
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                .view-bag-button {
+                    background: white;
+                    border: 1px solid black;
+                    &:hover {
+                        background: rgb(240, 240, 240);
+                    }
+                }
+
+                .checkout-button {
+                    background: #5ECE7B;
+                    color: white;
+
+                    &:hover {
+                        background: #1cc74a;
+                    }
+                }
+
+            }
+
+
         }
     }
 }
