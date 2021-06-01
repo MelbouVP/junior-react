@@ -38,8 +38,7 @@ export class CartOverlay extends Component {
             }
             
             return attributeKey
-        })
-        .join('')
+        }).join('')
 
 
     }

@@ -59,7 +59,7 @@ export class CartItem extends Component {
                 ]   
             }
 
-            this.props.handleChangedAttribute(this.props.cartItem.name, updateAttributes)
+            this.props.handleChangedAttribute(this.props.cartItem.name, updateAttributes.chosenAttributes)
 
             return this.setState( prevState => ({
                 chosenAttributes: [

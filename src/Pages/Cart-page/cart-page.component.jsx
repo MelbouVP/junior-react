@@ -32,7 +32,7 @@ export class CartPage extends Component {
             }
             
             return attributeKey
-        })
+        }).join('')
 
     }
 
@@ -63,7 +63,7 @@ export class CartPage extends Component {
         const cartItemComponents = cartItems.length ?
             cartItems.map( (cartItem,index) => 
                 <CartItem
-                    key={index} 
+                    key={`${cartItem.name}+${index}`} 
                     cartItem={cartItem} 
                     selectedCurrency={selectedCurrency}
                     handleChangedAttribute={this.changeSelectedAttribute}
