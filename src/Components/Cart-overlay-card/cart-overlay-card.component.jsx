@@ -6,9 +6,9 @@ import { incrementItem, decrementItem } from '../../Redux/cart/cart.actions'
 
 import ProductAttribute from '../Product-attribute/product-attribute.component'
 
-import './cart-card.styles.scss'
+import './cart-overlay-card.styles.scss'
 
-export class CartCard extends Component {
+export class CartOverlayCard extends Component {
     constructor(props){
         super(props)
 
@@ -59,7 +59,7 @@ export class CartCard extends Component {
                 ]   
             }
 
-            this.props.handleChangedAttribute(this.props.cartItem.name, updateAttributes)
+            this.props.handleChangedAttribute(this.props.cartItem.name, updateAttributes.chosenAttributes)
 
             return this.setState( prevState => ({
                 chosenAttributes: [
@@ -81,43 +81,37 @@ export class CartCard extends Component {
         this.props.decrementItem(this.props.cartItem)
     }
 
-
     render() {
+        console.log('cart-overlay-card rerendered')
 
-        console.log(this.state)
+        const { name, prices, gallery, attributes, quantity } = this.props.cartItem || {}
 
-        const { name, prices, gallery, selectedAttributes, attributes, quantity } = this.props.cartItem || {}
+
+        // console.log(this.state)
         
         const price = this.props.selectedCurrency && prices ? 
             prices.find( price => price.currency === this.props.selectedCurrency.name )
         :   
             null
 
-        const productAttributesList = attributes ? 
-            attributes.map( (attribute,index) => {
-
-
-                // let chosenAttributeIndex = selectedAttributes.findIndex(obj => obj.name === attribute.name)
-
-                
-                return (
-                    <ProductAttribute 
-                        key={name+index}
-                        attribute={attribute} 
-                        sendChosenAttributes={this.getChosenAttributes}
-                        productName={name}
-                        selectedAttribute={selectedAttributes[index]}
-                    />
-                )
-            })
+        const productAttributesList = this.props.cartItem.attributes ? 
+            attributes.map( (attribute,index) => 
+                <ProductAttribute 
+                    key={`${name}+${index}`}
+                    attribute={attribute} 
+                    sendChosenAttributes={this.getChosenAttributes}
+                    productName={name}
+                    selectedAttribute={this.props.cartItem.selectedAttributes[index]}
+                />
+            )
         : 
             null
         
         return (
-            <div className="cart-card__cotnainer">
-                <div className="cart-card__summary">
+            <div className="cart-overlay-card__container">
+                <div className="cart-overlay-card__summary">
 
-                    <div className="cart-card__sumary--name">
+                    <div className="cart-overlay-card__sumary--name">
                         <h1>
                             {
                                 name
@@ -125,7 +119,7 @@ export class CartCard extends Component {
                         </h1>
                     </div>
 
-                    <div className="cart-card__summary--price">
+                    <div className="cart-overlay-card__summary--price">
                         <span>
                             {
                                 this.props.selectedCurrency.symbol
@@ -139,7 +133,7 @@ export class CartCard extends Component {
                         </span>
                     </div>
 
-                    <div className="cart-card__summary--attributes">
+                    <div className="cart-overlay-card__summary--attributes">
                             {
                                 productAttributesList
                             }
@@ -147,9 +141,9 @@ export class CartCard extends Component {
 
                 </div>
 
-                <div className="cart-card__item">
+                <div className="cart-overlay-card__item">
 
-                    <div className="cart-card__item--quantity">
+                    <div className="cart-overlay-card__item--quantity">
                             
                         <button className="item-quantity__increment" onClick={this.handleIncrement}>
                         </button>
@@ -165,7 +159,7 @@ export class CartCard extends Component {
 
                     </div>
 
-                    <div className="cart-card__item--image">
+                    <div className="cart-overlay-card__item--image">
                         
                         <img src={gallery[0]} alt="Product" />
                     </div>
@@ -186,4 +180,4 @@ const mapStateToProps = createStructuredSelector({
     
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(CartCard))
+export default connect(mapStateToProps, mapDispatchToProps)(CartOverlayCard)

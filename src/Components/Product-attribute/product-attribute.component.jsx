@@ -7,18 +7,24 @@ export class ProductAttribute extends Component {
     constructor(props){
         super(props)
 
-        this.state = {}
+        this.state = {
+
+        }
     }
 
     componentDidMount() {
 
+
         const { selectedAttribute, attribute } = this.props
+
+        // console.log(selectedAttribute, "  ",attribute)
+
 
         if(selectedAttribute){
 
             this.setState( () => {
                 return {
-                    [selectedAttribute.name]:selectedAttribute.value
+                        [selectedAttribute.name]:selectedAttribute.value
 
                 }
             })
@@ -28,11 +34,13 @@ export class ProductAttribute extends Component {
 
             this.setState( () => {
                 return {
-                    [attributeName]: attribute.items[1].value
+                    // selected: {
+                        [attributeName]: attribute.items[0].value
+                    // }
                 }
             })
 
-            this.props.sendChosenAttributes(this.props.attribute.items[1].value, attributeName)
+            this.props.sendChosenAttributes(this.props.attribute.items[0].value, attributeName)
         }
     }
 
@@ -41,20 +49,24 @@ export class ProductAttribute extends Component {
     } 
 
     handleChange = (value, attributeName) => {
-        
+        console.log(value, "  ", attributeName)
+        this.props.sendChosenAttributes(value, attributeName)
         this.setState( () => {
             
             return {
-                [attributeName]: value
+                    [attributeName]: value
             }
         })
+
  
-        this.props.sendChosenAttributes(value, attributeName)
 
     }
 
     render() {
-        const { attribute, productName } = this.props
+        let { attribute, productName } = this.props
+        // console.log(this.state)
+
+        console.log('product-attribute')
         
         const attributeLabelComponents = [attribute].map( (attribute,index) => {
             
@@ -144,4 +156,4 @@ export class ProductAttribute extends Component {
     }
 }
 
-export default React.memo(ProductAttribute)
+export default ProductAttribute

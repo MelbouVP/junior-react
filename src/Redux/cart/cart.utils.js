@@ -83,6 +83,9 @@ export const changeCartItemAttribute = (cartItems, cartItemToChange) => {
         cartItem.name === cartItemToChange.name
     )
 
+    // let newAttributeKey = createAttributesKey(cartItemToChange.attributes)
+
+
     return cartItems.map( cartItem => {
 
         if(cartItem.name === existingCartItem.name){
@@ -97,3 +100,22 @@ export const changeCartItemAttribute = (cartItems, cartItemToChange) => {
         }
     })
 }
+
+// const createAttributesKey = (attributes) => {
+
+//     return attributes.map( attribute => {
+
+//         let attributeKey = ''
+
+//         for(let i = 0; i < attribute.name.length; i += 4){
+//             attributeKey += attribute.name[i]
+//         }
+
+//         for(let i = 0; i < attribute.value.length; i++){
+//             attributeKey += attribute.value[i]
+//         }
+        
+//         return attributeKey
+//     })
+//     .join('')
+// }

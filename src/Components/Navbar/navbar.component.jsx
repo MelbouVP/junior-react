@@ -13,7 +13,7 @@ import { selectSelectedCategory } from '../../Redux/shop/shop.selectors'
 import { changeSelectedCategory } from '../../Redux/shop/shop.actions'
 
 import { toggleCartOverlay } from '../../Redux/cart/cart.actions';
-import { selectCartOverlayHidden } from '../../Redux/cart/cart.selectors'
+import { selectCartOverlayHidden, selectCartItemCount } from '../../Redux/cart/cart.selectors'
 
 import { changeSelectedCurrency, toggleCurrencyOverlay } from '../../Redux/currency/currency.actions';
 
@@ -35,6 +35,8 @@ export class Navbar extends Component {
     }
 
     handleCartOverlay = () => {
+
+        if(history.location.pathname === '/cart') return
         
         if(!this.props.currencyOverlayHidden){
             this.props.toggleCurrencyOverlay()
@@ -67,7 +69,8 @@ export class Navbar extends Component {
             selectedCurrency, 
             currencies, 
             currencySymbols ,
-            selectedCategory
+            selectedCategory,
+            cartItemCount
         } = this.props
 
 
@@ -117,9 +120,18 @@ export class Navbar extends Component {
                             onClick={this.handleCartOverlay}
                         >
                             <CartIcon />
-                            <div className="navbar__cart-icon--product-counter">
-                                <p>2</p>
-                            </div>
+
+                            {
+                                    cartItemCount > 0 ?
+                                        <div className="navbar__cart-icon--product-counter">
+                                            {
+                                                cartItemCount
+                                            }
+                                        </div>
+                                    :
+                                        null
+                            }
+
 
                         </div>
 
@@ -164,7 +176,8 @@ const mapStateToProps = createStructuredSelector({
     selectedCurrency: selectSelectedCurrency,
     currencies: selectCurrencies,
     currencySymbols: selectCurrencySymbols,
-    selectedCategory: selectSelectedCategory
+    selectedCategory: selectSelectedCategory,
+    cartItemCount: selectCartItemCount
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

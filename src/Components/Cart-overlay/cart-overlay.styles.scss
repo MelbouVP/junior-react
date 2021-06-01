@@ -5,26 +5,56 @@
     top: 3.25rem;
     right: 0;
     max-height: 540px;
-    width: 325px;
+    width: 380px;
     box-shadow: 1px 1px 5px black;
     background: white;
     z-index:100;
-
+    overflow-y: scroll;
     .cart-overlay__content {
+    
         
 
         .content__header {
             padding: 1rem;
+
+            p {
+                span {
+                    &:first-child {
+                        font-weight: 700
+                    }
+
+                    font-weight: 500;
+                    padding-right: .25rem;
+                }
+            }
         }
 
         .content__cart-items {
+            // overflow-y: scroll;
+        }
 
+        .content__cart-total {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 1rem;
+
+            h4 {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 500;
+            }
+
+            span {
+                font-weight: 700;
+            }
         }
 
         .content__action-buttons {
 
             display: flex;
             justify-content: space-between;
+            padding-top: 1rem;
 
             .content__action {
 

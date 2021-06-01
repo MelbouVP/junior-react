@@ -17,6 +17,8 @@ export class CartPage extends Component {
 
     createAttributesKey = (attributes) => {
 
+        console.log(attributes)
+
         return attributes.map( attribute => {
 
             let attributeKey = ''
@@ -31,13 +33,13 @@ export class CartPage extends Component {
             
             return attributeKey
         })
-        .join('')
-
 
     }
 
 
     changeSelectedAttribute = (productName, attributes) => {
+
+        console.log(attributes)
 
         let newAttributeKey = this.createAttributesKey(attributes)
 
@@ -52,7 +54,7 @@ export class CartPage extends Component {
         let cartTotal = cartItems.length ? cartItems.reduce((accumulator, currentValue) => {
                 
                 let currency = currentValue.prices.find( price => price.currency === selectedCurrency.name)
-                return (accumulator + (currency.amount*currentValue.quantity)).toFixed(2)
+                return (accumulator + (currency.amount*currentValue.quantity))
 
             },0)
         :
@@ -107,7 +109,7 @@ export class CartPage extends Component {
 
                                         <span>
                                             {
-                                                cartTotal
+                                                cartTotal.toFixed(2)
                                             }
                                         </span>
                                     </div>

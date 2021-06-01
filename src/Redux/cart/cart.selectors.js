@@ -7,6 +7,11 @@ export const selectCartItems = createSelector(
     cart => cart.cartItems
 );
 
+export const selectCartItemCount = createSelector(
+    [selectCart],    
+    cart => cart.cartItems.length
+);
+
 export const selectCartOverlayHidden = createSelector(
     [selectCart],    
     cart => cart.cartOverlayHidden
