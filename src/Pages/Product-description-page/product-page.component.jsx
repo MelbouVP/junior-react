@@ -22,14 +22,11 @@ export class ProductPage extends Component {
     }
 
     componentDidMount(){
-
         if(!this.props.selectedProduct) history.push('/')
     }
 
     getChosenAttributes = (value, attributeName) => {
 
-        console.log(attributeName)
-        
         this.setState( prevState => {
 
             let attributeExists = prevState.chosenAttributes.find( attribute => attribute.name === attributeName)
@@ -64,45 +61,16 @@ export class ProductPage extends Component {
         })
     }
 
-    createAttributesKey = (attributes) => {
-        
-        return attributes.map( attribute => {
-            let attributeKey = ''
-
-            for(let i = 0; i < attribute.name.length; i += 4){
-                attributeKey += attribute.name[i]
-            }
-
-            for(let i = 0; i < attribute.value.length; i++){
-                attributeKey += attribute.value[i]
-            }
-            
-            return attributeKey
-        })
-        .join('')
-    }
-
     handleCartItem = (e,name, prices, gallery, attributes) => {
         e.preventDefault()
         const { chosenAttributes } = this.state
-
-        let attributesKey = this.createAttributesKey(chosenAttributes)
-
-        let selectedAttributes = []
-        chosenAttributes.forEach( attribute => {
-            let obj = {}
-            obj.name = attribute.name
-            obj.value = attribute.value
-            selectedAttributes.push(obj)
-        })
 
         let product = {
             name,
             prices,
             gallery,
             attributes,
-            selectedAttributes: chosenAttributes,
-            selectedAttributesID: attributesKey
+            selectedAttributes: chosenAttributes
         }
     
         this.props.addItem(product)

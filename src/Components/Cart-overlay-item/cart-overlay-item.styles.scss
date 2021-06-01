@@ -77,24 +77,7 @@
                             height: 1.25rem;
                             width: 1.25rem;
         
-                            &:hover {
-                                cursor: pointer;
-                            }
-        
-                            &::after {
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                border-radius: .2rem;
-                                height: 100%;
-                                width: 100%;
-                                content: ' ';
-                                border: 1px solid gray;
-                            }
-        
                             &:checked::after {
-                                content: "\2714";
-                                color: rgb(48, 126, 242);
                                 border: 1.5px solid rgb(48, 126, 242);
                                 font-size: 1rem;
                             }
@@ -194,9 +177,7 @@
         }
 
         .cart-overlay-card__item--image {
-            // height: 100%;
             width: 60%;
-            // flex-basis: 2;
 
             img {
                 object-fit: scale-down;

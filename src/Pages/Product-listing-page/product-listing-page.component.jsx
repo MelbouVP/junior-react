@@ -6,6 +6,8 @@ import { createStructuredSelector } from 'reselect'
 import ProductCard from '../../Components/Product-card/product-card.component'
 import Spinner from '../../Components/Spinners/spinner.component'
 
+import { addItem } from '../../Redux/cart/cart.actions'
+
 import { changeSelectedProduct } from '../../Redux/shop/shop.actions'
 
 import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors'
@@ -26,8 +28,18 @@ export class ProductListingPage extends Component {
         history.push(`/product/${product.name}`)
     }
 
-    handleCartItem = () => {
-        console.log('added to cart')
+    handleCartItem = (product) => {
+        
+        let defaultAttributes = product.attributes.map(attribute => (
+            {
+                name: (attribute.name).toLowerCase(), 
+                value: attribute.items[1].value
+            }
+        ))
+
+        product = {...product, selectedAttributes: defaultAttributes}
+
+        this.props.addItem(product)
     }
 
     render() {
@@ -78,7 +90,8 @@ export class ProductListingPage extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    changeSelectedProduct: (product) => dispatch(changeSelectedProduct(product))
+    changeSelectedProduct: (product) => dispatch(changeSelectedProduct(product)),
+    addItem: (product) => dispatch(addItem(product))
 })
 
 const mapStateToProps = createStructuredSelector({

@@ -15,35 +15,9 @@ import './cart-page.styles.scss'
 export class CartPage extends Component {
 
 
-    createAttributesKey = (attributes) => {
-
-        console.log(attributes)
-
-        return attributes.map( attribute => {
-
-            let attributeKey = ''
-
-            for(let i = 0; i < attribute.name.length; i += 4){
-                attributeKey += attribute.name[i]
-            }
-
-            for(let i = 0; i < attribute.value.length; i++){
-                attributeKey += attribute.value[i]
-            }
-            
-            return attributeKey
-        }).join('')
-
-    }
-
-
     changeSelectedAttribute = (productName, attributes) => {
 
-        console.log(attributes)
-
-        let newAttributeKey = this.createAttributesKey(attributes)
-
-        this.props.changeCartItemAttribute({name: productName, attributes, newAttributeKey})
+        this.props.changeCartItemAttribute({name: productName, attributes})
 
     }
 

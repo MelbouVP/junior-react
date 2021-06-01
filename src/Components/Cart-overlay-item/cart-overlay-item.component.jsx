@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
 
 import { incrementItem, decrementItem } from '../../Redux/cart/cart.actions'
 
@@ -82,13 +81,9 @@ export class CartOverlayItem extends Component {
     }
 
     render() {
-        console.log('cart-overlay-card rerendered')
 
-        const { name, prices, gallery, attributes, quantity } = this.props.cartItem || {}
+        const { name, prices, gallery, attributes, selectedAttributes, quantity } = this.props.cartItem || {}
 
-
-        // console.log(this.state)
-        
         const price = this.props.selectedCurrency && prices ? 
             prices.find( price => price.currency === this.props.selectedCurrency.name )
         :   
@@ -101,7 +96,7 @@ export class CartOverlayItem extends Component {
                     attribute={attribute} 
                     sendChosenAttributes={this.getChosenAttributes}
                     productName={name}
-                    selectedAttribute={this.props.cartItem.selectedAttributes[index]}
+                    selectedAttribute={selectedAttributes[index]}
                 />
             )
         : 
@@ -175,9 +170,4 @@ const mapDispatchToProps = dispatch => ({
     decrementItem: (item) => dispatch(decrementItem(item))
 })
 
-
-const mapStateToProps = createStructuredSelector({
-    
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartOverlayItem)
+export default connect(null, mapDispatchToProps)(CartOverlayItem)

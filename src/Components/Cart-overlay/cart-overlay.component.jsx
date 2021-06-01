@@ -23,36 +23,10 @@ export class CartOverlay extends Component {
         this.props.toggleCartOverlay()
     }
 
-    createAttributesKey = (attributes) => {
-
-        return attributes.map( attribute => {
-
-            let attributeKey = ''
-
-            for(let i = 0; i < attribute.name.length; i += 4){
-                attributeKey += attribute.name[i]
-            }
-
-            for(let i = 0; i < attribute.value.length; i++){
-                attributeKey += attribute.value[i]
-            }
-            
-            return attributeKey
-        }).join('')
-
-
-    }
-
 
     changeSelectedAttribute = (productName,  attributes) => {
 
-        // let attributes = attributess.chosenAttributes
-
-        console.log(attributes)
-
-        let newAttributeKey = this.createAttributesKey(attributes)
-
-        this.props.changeCartItemAttribute({name: productName, attributes, newAttributeKey})
+        this.props.changeCartItemAttribute({name: productName, attributes})
 
     }
 
@@ -61,7 +35,6 @@ export class CartOverlay extends Component {
         const { cartItems, selectedCurrency, cartItemCount } = this.props
 
         
-
         const cartOverlayItemComponents = cartItems ?
             cartItems.map((item, index) => 
                 <CartOverlayItem

@@ -78,7 +78,10 @@ export class ProductCard extends Component {
                             </div>
                         </div>
                     :
-                        <div className="product-card__cart-icon" onClick={handleCartItem}>
+                        <div 
+                            className="product-card__cart-icon" 
+                            onClick={() => handleCartItem(this.props.productData)}
+                        >
                             <CartIcon />
                         </div>
                 }

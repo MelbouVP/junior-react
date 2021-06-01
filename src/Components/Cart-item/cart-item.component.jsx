@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-
 import { incrementItem, decrementItem } from '../../Redux/cart/cart.actions'
 
 import ProductAttribute from '../Product-attribute/product-attribute.component'
@@ -94,22 +92,15 @@ export class CartItem extends Component {
             null
 
         const productAttributesList = attributes ? 
-            attributes.map( (attribute,index) => {
-
-
-                // let chosenAttributeIndex = selectedAttributes.findIndex(obj => obj.name === attribute.name)
-
-                
-                return (
+            attributes.map( (attribute,index) => 
                     <ProductAttribute 
-                        key={name+index}
+                        key={`${name}+${index}`}
                         attribute={attribute} 
                         sendChosenAttributes={this.getChosenAttributes}
                         productName={name}
                         selectedAttribute={selectedAttributes[index]}
                     />
                 )
-            })
         : 
             null
         
@@ -181,9 +172,4 @@ const mapDispatchToProps = dispatch => ({
     decrementItem: (item) => dispatch(decrementItem(item))
 })
 
-
-const mapStateToProps = createStructuredSelector({
-    
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartItem)
+export default connect(null, mapDispatchToProps)(CartItem)

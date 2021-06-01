@@ -35,12 +35,12 @@ export class ProductAttribute extends Component {
             this.setState( () => {
                 return {
                     // selected: {
-                        [attributeName]: attribute.items[0].value
+                        [attributeName]: attribute.items[1].value
                     // }
                 }
             })
 
-            this.props.sendChosenAttributes(this.props.attribute.items[0].value, attributeName)
+            this.props.sendChosenAttributes(this.props.attribute.items[1].value, attributeName)
         }
     }
 

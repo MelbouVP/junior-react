@@ -6,6 +6,9 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
         cartItem.name === cartItemToAdd.name
     )
 
+    const selectedAttributesID = createAttributesKey(cartItemToAdd.selectedAttributes)
+    cartItemToAdd = {...cartItemToAdd, selectedAttributesID}
+
     if(existingCartItem) {
         return cartItems.map(cartItem => {
 
@@ -83,7 +86,7 @@ export const changeCartItemAttribute = (cartItems, cartItemToChange) => {
         cartItem.name === cartItemToChange.name
     )
 
-    // let newAttributeKey = createAttributesKey(cartItemToChange.attributes)
+    let newAttributeKey = createAttributesKey(cartItemToChange.attributes)
 
 
     return cartItems.map( cartItem => {
@@ -92,7 +95,7 @@ export const changeCartItemAttribute = (cartItems, cartItemToChange) => {
             return {
                 ...existingCartItem, 
                 selectedAttributes: cartItemToChange.attributes,
-                selectedAttributesID: cartItemToChange.newAttributeKey,
+                selectedAttributesID: newAttributeKey,
                 quantity: 1
             }
         } else {
@@ -101,21 +104,21 @@ export const changeCartItemAttribute = (cartItems, cartItemToChange) => {
     })
 }
 
-// const createAttributesKey = (attributes) => {
+const createAttributesKey = (attributes) => {
 
-//     return attributes.map( attribute => {
+    return attributes.map( attribute => {
 
-//         let attributeKey = ''
+        let attributeKey = ''
 
-//         for(let i = 0; i < attribute.name.length; i += 4){
-//             attributeKey += attribute.name[i]
-//         }
+        for(let i = 0; i < attribute.name.length; i += 4){
+            attributeKey += attribute.name[i]
+        }
 
-//         for(let i = 0; i < attribute.value.length; i++){
-//             attributeKey += attribute.value[i]
-//         }
+        for(let i = 0; i < attribute.value.length; i++){
+            attributeKey += attribute.value[i]
+        }
         
-//         return attributeKey
-//     })
-//     .join('')
-// }
+        return attributeKey
+    })
+    .join('')
+}
