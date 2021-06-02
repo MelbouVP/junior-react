@@ -182,11 +182,19 @@ export class ProductPage extends Component {
                                     </button>
                                 </div>
 
-                                <div className="product-page__description">
+
+                                {/* Parse provided product description (with HTML tags) as HTML as it was indicated in test details */}
+                                <div 
+                                    className="product-page__description" 
+                                    dangerouslySetInnerHTML={{__html: description}}
+                                ></div>
+
+                                {/* Or alternatively and much safer, remove tags from description and parse variable content */}
+                                {/* <div className="product-page__description">
                                     {
                                         description.replace(/<\/?[^>]+(>|$)/g, '')
                                     }
-                                </div>
+                                </div> */}
 
                             </form>
 
