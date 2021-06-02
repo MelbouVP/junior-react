@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { incrementItem, decrementItem } from '../../Redux/cart/cart.actions'
+import { incrementItem, decrementItem, changeCartItemAttribute } from '../../Redux/cart/cart.actions'
 
 import ProductAttribute from '../Product-attribute/product-attribute.component'
 import Carousel from '../Carousel/carousel.component'
@@ -17,19 +17,25 @@ export class Item extends Component {
     }
 
     componentDidMount(){
-        this.setState( prevState => ({
-                ...prevState,
-                chosenAttributes: this.props.cartItem.selectedAttributes
-            })
-        )
+        // this.setState( prevState => ({
+        //         ...prevState,
+        //         chosenAttributes: this.props.cartItem.selectedAttributes
+        //     })
+        // )
+    }
+
+    changeSelectedAttribute = (productName, attributes) => {
+
+        this.props.changeCartItemAttribute({name: productName, attributes})
+
     }
 
     getChosenAttributes = (value, attributeName) => {
         
-        let attributeExists = this.state.chosenAttributes.find( attribute => attribute.name === attributeName)
+        let attributeExists = this.props.cartItem.selectedAttributes.find( attribute => attribute.name === attributeName)
 
         if(attributeExists){
-            let updatedAttributes = this.state.chosenAttributes
+            let updatedAttributes = this.props.cartItem.selectedAttributes
                     .map(attribute => {                    
                         if(attribute.name === attributeName){
                             attribute.value = value
@@ -39,7 +45,7 @@ export class Item extends Component {
                         }
             })
 
-            this.props.handleChangedAttribute(this.props.cartItem.name, updatedAttributes)
+            this.changeSelectedAttribute(this.props.cartItem.name, updatedAttributes)
 
             return this.setState( prevState => ({
                 ...prevState,
@@ -50,7 +56,7 @@ export class Item extends Component {
 
             let updateAttributes = {
                 chosenAttributes: [
-                    ...this.state.chosenAttributes,
+                    ...this.props.cartItem.selectedAttributes,
                     {
                         name: attributeName,
                         value
@@ -58,7 +64,7 @@ export class Item extends Component {
                 ]   
             }
 
-            this.props.handleChangedAttribute(this.props.cartItem.name, updateAttributes.chosenAttributes)
+            this.changeSelectedAttribute(this.props.cartItem.name, updateAttributes.chosenAttributes)
 
             return this.setState( prevState => ({
                 chosenAttributes: [
@@ -176,7 +182,8 @@ export class Item extends Component {
 
 const mapDispatchToProps = dispatch => ({
     incrementItem: (item) => dispatch(incrementItem(item)),
-    decrementItem: (item) => dispatch(decrementItem(item))
+    decrementItem: (item) => dispatch(decrementItem(item)),
+    changeCartItemAttribute: (item) => dispatch(changeCartItemAttribute(item))
 })
 
 export default connect(null, mapDispatchToProps)(Item)

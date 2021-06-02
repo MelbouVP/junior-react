@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { selectCartItems } from '../../Redux/cart/cart.selectors.js'
+import { selectCartItems, selectCartTotal } from '../../Redux/cart/cart.selectors.js'
 import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors.js'
 
 import { changeCartItemAttribute } from '../../Redux/cart/cart.actions'
-
 
 import Item from '../../Components/Item/Item.component'
 
@@ -15,24 +14,14 @@ import './cart-page.styles.scss'
 export class CartPage extends Component {
 
 
-    changeSelectedAttribute = (productName, attributes) => {
+    // changeSelectedAttribute = (productName, attributes) => {
 
-        this.props.changeCartItemAttribute({name: productName, attributes})
+    //     this.props.changeCartItemAttribute({name: productName, attributes})
 
-    }
+    // }
 
     render() {
-        const { cartItems } = this.props
-        const { selectedCurrency } = this.props
-
-        let cartTotal = cartItems.length ? cartItems.reduce((accumulator, currentValue) => {
-                
-                let currency = currentValue.prices.find( price => price.currency === selectedCurrency.name)
-                return (accumulator + (currency.amount*currentValue.quantity))
-
-            },0)
-        :
-            null
+        const { cartItems, cartTotal, selectedCurrency } = this.props
 
         const cartItemComponents = cartItems.length ?
             cartItems.map( (cartItem,index) => 
@@ -40,7 +29,7 @@ export class CartPage extends Component {
                     key={`${cartItem.name}+${index}`} 
                     cartItem={cartItem} 
                     selectedCurrency={selectedCurrency}
-                    handleChangedAttribute={this.changeSelectedAttribute}
+                    // handleChangedAttribute={this.changeSelectedAttribute}
                 /> 
             )
         :
@@ -105,7 +94,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems,
-    selectedCurrency: selectSelectedCurrency
+    selectedCurrency: selectSelectedCurrency,
+    cartTotal: selectCartTotal
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartPage)

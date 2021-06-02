@@ -14,31 +14,22 @@ export class ProductAttribute extends Component {
 
     componentDidMount() {
 
-
         const { selectedAttribute, attribute } = this.props
-
-        // console.log(selectedAttribute, "  ",attribute)
-
 
         if(selectedAttribute){
 
-            this.setState( () => {
-                return {
-                        [selectedAttribute.name]:selectedAttribute.value
-
-                }
-            })
+            this.setState( () => ({
+                    [selectedAttribute.name]:selectedAttribute.value
+                })
+            )
             
         } else {
             let attributeName = this.sanitizeVariable(attribute.name)
 
-            this.setState( () => {
-                return {
-                    // selected: {
-                        [attributeName]: attribute.items[1].value
-                    // }
-                }
-            })
+            this.setState( () => ({
+                    [attributeName]: attribute.items[1].value
+                })
+            )
 
             this.props.sendChosenAttributes(this.props.attribute.items[1].value, attributeName)
         }
@@ -49,14 +40,13 @@ export class ProductAttribute extends Component {
     } 
 
     handleChange = (value, attributeName) => {
-        console.log(value, "  ", attributeName)
+
         this.props.sendChosenAttributes(value, attributeName)
-        this.setState( () => {
-            
-            return {
-                    [attributeName]: value
-            }
-        })
+
+        this.setState( () => ({
+                [attributeName]: value
+            })
+        )
 
  
 
@@ -64,10 +54,8 @@ export class ProductAttribute extends Component {
 
     render() {
         let { attribute, productName } = this.props
-        // console.log(this.state)
 
-        console.log('product-attribute')
-        
+
         const attributeLabelComponents = [attribute].map( (attribute,index) => {
             
             let attributeName = this.sanitizeVariable(attribute.name)
@@ -156,4 +144,4 @@ export class ProductAttribute extends Component {
     }
 }
 
-export default ProductAttribute
+export default React.memo(ProductAttribute)

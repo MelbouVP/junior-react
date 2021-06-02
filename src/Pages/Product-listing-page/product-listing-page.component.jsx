@@ -8,7 +8,6 @@ import Spinner from '../../Components/Spinners/spinner.component'
 import PageOverlay from '../../Components/Page-overlay/page-overlay.component'
 
 import { addItem } from '../../Redux/cart/cart.actions'
-import { selectCartOverlayHidden } from '../../Redux/cart/cart.selectors'
 
 import { changeSelectedProduct } from '../../Redux/shop/shop.actions'
 
@@ -33,7 +32,7 @@ export class ProductListingPage extends Component {
     handleCartItem = (product) => {
         
         let defaultAttributes = product.attributes.map(attribute => ({
-            
+
                 name: (attribute.name).toLowerCase().replace(/ /g, '-'), 
                 value: attribute.items[1].value
         }))
@@ -45,10 +44,8 @@ export class ProductListingPage extends Component {
 
     render() {
 
-        const { shopHasLoaded, categoryProducts, selectedCurrency, cartOverlayHidden } = this.props
+        const { shopHasLoaded, categoryProducts, selectedCurrency } = this.props
         let { selectedCategory } = this.props
-
-        console.log(cartOverlayHidden)
 
         // capitalize first letter
         selectedCategory = selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)
@@ -104,8 +101,7 @@ const mapStateToProps = createStructuredSelector({
     selectedCategory: selectSelectedCategory,
     shopHasLoaded: selectShopHasLoaded,
     categoryProducts: selectShopCategoryProducts,
-    selectedCurrency: selectSelectedCurrency,
-    cartOverlayHidden: selectCartOverlayHidden
+    selectedCurrency: selectSelectedCurrency
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductListingPage)

@@ -6,7 +6,7 @@ import history from '../../history'
 
 import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors'
 
-import { selectCartItems, selectCartItemCount } from '../../Redux/cart/cart.selectors'
+import { selectCartItems, selectCartItemCount, selectCartTotal } from '../../Redux/cart/cart.selectors'
 import { 
     toggleCartOverlay,
     changeCartItemAttribute
@@ -24,15 +24,15 @@ export class CartOverlay extends Component {
     }
 
 
-    changeSelectedAttribute = (productName,  attributes) => {
+    // changeSelectedAttribute = (productName,  attributes) => {
 
-        this.props.changeCartItemAttribute({name: productName, attributes})
+    //     this.props.changeCartItemAttribute({name: productName, attributes})
 
-    }
+    // }
 
     render() {
 
-        const { cartItems, selectedCurrency, cartItemCount } = this.props
+        const { cartItems, selectedCurrency, cartItemCount, cartTotal } = this.props
 
         
         const cartOverlayItemComponents = cartItems ?
@@ -41,22 +41,14 @@ export class CartOverlay extends Component {
                     key={`${index}-${item.name}`}
                     cartItem={item}
                     selectedCurrency={selectedCurrency}
-                    handleChangedAttribute={this.changeSelectedAttribute}
+                    // handleChangedAttribute={this.changeSelectedAttribute}
                     hideCarousel={true}
                 />
             )
         :
             null
 
-        let cartTotal = cartItems.length ? 
-            cartItems.reduce((accumulator, currentValue) => {
-            
-                let currency = currentValue.prices.find( price => price.currency === selectedCurrency.name)
-                return (accumulator + (currency.amount*currentValue.quantity))
-            },0)
-        :
-            null
-        
+
         return (
             <div className="cart-overlay">
                 <div className="cart-overlay__content">
@@ -130,7 +122,6 @@ export class CartOverlay extends Component {
                             </button>
                         </div>
 
-
                     </div>
                 </div>
             </div>
@@ -146,7 +137,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems,
     selectedCurrency: selectSelectedCurrency,
-    cartItemCount: selectCartItemCount
+    cartItemCount: selectCartItemCount,
+    cartTotal: selectCartTotal
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartOverlay)
