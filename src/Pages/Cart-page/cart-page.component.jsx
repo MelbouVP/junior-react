@@ -8,7 +8,7 @@ import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors.
 import { changeCartItemAttribute } from '../../Redux/cart/cart.actions'
 
 
-import CartItem from '../../Components/Cart-item/cart-item.component'
+import Item from '../../Components/Item/Item.component'
 
 import './cart-page.styles.scss'
 
@@ -36,7 +36,7 @@ export class CartPage extends Component {
 
         const cartItemComponents = cartItems.length ?
             cartItems.map( (cartItem,index) => 
-                <CartItem
+                <Item
                     key={`${cartItem.name}+${index}`} 
                     cartItem={cartItem} 
                     selectedCurrency={selectedCurrency}

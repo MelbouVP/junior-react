@@ -32,12 +32,11 @@ export class ProductListingPage extends Component {
 
     handleCartItem = (product) => {
         
-        let defaultAttributes = product.attributes.map(attribute => (
-            {
-                name: (attribute.name).toLowerCase(), 
+        let defaultAttributes = product.attributes.map(attribute => ({
+            
+                name: (attribute.name).toLowerCase().replace(/ /g, '-'), 
                 value: attribute.items[1].value
-            }
-        ))
+        }))
 
         product = {...product, selectedAttributes: defaultAttributes}
 
