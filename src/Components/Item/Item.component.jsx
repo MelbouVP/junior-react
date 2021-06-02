@@ -58,8 +58,6 @@ export class Item extends Component {
 
     render() {
 
-        console.log(this.state)
-
         const { name, prices, gallery, selectedAttributes, attributes, quantity } = this.props.cartItem || {}
         
         const price = this.props.selectedCurrency && prices ? 

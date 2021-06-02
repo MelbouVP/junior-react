@@ -11,6 +11,7 @@ import {
 
 import { selectSelectedCategory, selectShopCategoryNames } from './shop.selectors'
 
+import { createInitialProductPagination } from './shop.utils'
 
 function* fetchProductData(){
 
@@ -24,9 +25,13 @@ function* fetchProductData(){
 
         const data = yield OpusClient.post(CategoryDataQuery(category))
 
+        console.log(data.category.products)
+
         let categoryProducts = {}
 
-        categoryProducts[data.category.name] = data.category.products
+        let productPagination = createInitialProductPagination(data.category.products.length)
+
+        categoryProducts[data.category.name] = { products: data.category.products, ...productPagination }
 
         yield put(fetchProductDataSuccess(categoryProducts))
 

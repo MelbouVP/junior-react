@@ -24,5 +24,5 @@ export const selectShopCategoryNames = createSelector(
 
 export const selectShopCategoryProducts = createSelector(
     [selectShop],
-    shop => shop.products[shop.selectedCategory]
+    shop => shop.products[shop.selectedCategory] ? shop.products[shop.selectedCategory].products : null
 )

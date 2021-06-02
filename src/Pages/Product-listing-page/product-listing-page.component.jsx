@@ -47,6 +47,7 @@ export class ProductListingPage extends Component {
         const { shopHasLoaded, categoryProducts, selectedCurrency } = this.props
         let { selectedCategory } = this.props
 
+
         // capitalize first letter
         selectedCategory = selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)
 
