@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { incrementItem, decrementItem } from '../../Redux/cart/cart.actions'
 
 import ProductAttribute from '../Product-attribute/product-attribute.component'
+import Carousel from '../Carousel/carousel.component'
 
 import './cart-item.styles.scss'
 
@@ -157,8 +158,14 @@ export class CartItem extends Component {
                     </div>
 
                     <div className="cart-card__item--image">
+
+                        {
+                            gallery.length > 1 ?
+                                <Carousel gallery={gallery}/>
+                            :
+                                <img src={gallery[0]} alt="Product" />
+                        }
                         
-                        <img src={gallery[0]} alt="Product" />
                     </div>
 
                 </div>

@@ -1,0 +1,46 @@
+
+.carousel__product-images {
+
+    position: relative;
+      
+    .slick-arrow {
+        z-index: 1000;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.25);
+        border-radius: 50%;
+        height: 24px;
+        width: 24px;
+        text-align: center;
+        display: flex;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+    }
+
+    .slick-prev {
+        left: .15rem;
+    
+        &:before {
+            content: '\276E';
+            padding-right: .15rem;
+        }
+    }
+    
+    .slick-next {
+        right: .15rem;
+        &:before {
+            content: '\276F';
+            padding-left: .15rem;
+        }
+    }
+    
+    .slick-prev::before,
+    .slick-next::before {
+        line-height: 0.5;
+        font-size: 1.25rem;
+
+        
+    }
+      
+}
