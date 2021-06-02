@@ -123,6 +123,8 @@
 
         .item__item--image {
             width: 60%;
+            display: flex;
+            align-items: center;
 
             img {
                 object-fit: scale-down;

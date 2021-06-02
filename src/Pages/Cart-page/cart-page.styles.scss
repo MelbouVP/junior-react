@@ -38,3 +38,26 @@
         }
     }
 }
+
+@media only screen and (max-width: 830px) {
+    .cart-page__container {
+        .cart-page__content {
+
+            .item__container {
+                flex-direction: column;
+    
+                .item__summary {
+                    width: 100%;
+                }
+    
+                .item__item {
+                    width: 100%;
+                }
+            }
+            
+        }
+        .cart-page__cart-total {
+            padding: .5rem;
+        }
+    }
+}
