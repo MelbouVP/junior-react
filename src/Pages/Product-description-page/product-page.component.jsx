@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import ProductAttribute from '../../Components/Product-attribute/product-attribute.component'
-
+import PageOverlay from '../../Components/Page-overlay/page-overlay.component'
 
 import { selectSelectedProduct } from '../../Redux/shop/shop.selectors'
 import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors'
@@ -22,6 +22,7 @@ export class ProductPage extends Component {
     }
 
     componentDidMount(){
+
         if(!this.props.selectedProduct) history.push('/')
     }
 
@@ -65,12 +66,20 @@ export class ProductPage extends Component {
         e.preventDefault()
         const { chosenAttributes } = this.state
 
+        let selectedAttributes = []
+        chosenAttributes.forEach( attribute => {
+            let obj = {}
+            obj.name = attribute.name
+            obj.value = attribute.value
+            selectedAttributes.push(obj)
+        })
+
         let product = {
             name,
             prices,
             gallery,
             attributes,
-            selectedAttributes: chosenAttributes
+            selectedAttributes
         }
     
         this.props.addItem(product)
@@ -112,7 +121,9 @@ export class ProductPage extends Component {
             <div className="product-page" >
                 {
                     this.props.selectedProduct ?
-                        <div className="product-page__container">
+                    <div className="product-page__container">
+
+                        <PageOverlay />
 
                             <div className="product-page__images">
 

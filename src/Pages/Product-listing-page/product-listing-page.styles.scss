@@ -2,7 +2,9 @@
 
 .listing-page {
 
+
     &__container {
+        position: relative;
         padding: 5.5rem;
 
         .listing-page__header {
