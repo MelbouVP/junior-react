@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { selectCartItems, selectCartTotal } from '../../Redux/cart/cart.selectors.js'
 import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors.js'
 
+import { selectCartItems, selectCartTotal } from '../../Redux/cart/cart.selectors.js'
 import { changeCartItemAttribute } from '../../Redux/cart/cart.actions'
 
 import Item from '../../Components/Item/Item.component'
@@ -13,12 +13,6 @@ import './cart-page.styles.scss'
 
 export class CartPage extends Component {
 
-
-    // changeSelectedAttribute = (productName, attributes) => {
-
-    //     this.props.changeCartItemAttribute({name: productName, attributes})
-
-    // }
 
     render() {
         const { cartItems, cartTotal, selectedCurrency } = this.props
@@ -29,7 +23,6 @@ export class CartPage extends Component {
                     key={`${cartItem.name}+${index}`} 
                     cartItem={cartItem} 
                     selectedCurrency={selectedCurrency}
-                    // handleChangedAttribute={this.changeSelectedAttribute}
                 /> 
             )
         :

@@ -6,7 +6,12 @@ import history from '../../history'
 
 import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors'
 
-import { selectCartItems, selectCartItemCount, selectCartTotal } from '../../Redux/cart/cart.selectors'
+import { 
+    selectCartItems, 
+    selectCartItemCount, 
+    selectCartTotal 
+} from '../../Redux/cart/cart.selectors'
+
 import { 
     toggleCartOverlay,
     changeCartItemAttribute
@@ -23,13 +28,6 @@ export class CartOverlay extends Component {
         this.props.toggleCartOverlay()
     }
 
-
-    // changeSelectedAttribute = (productName,  attributes) => {
-
-    //     this.props.changeCartItemAttribute({name: productName, attributes})
-
-    // }
-
     render() {
 
         const { cartItems, selectedCurrency, cartItemCount, cartTotal } = this.props
@@ -41,7 +39,6 @@ export class CartOverlay extends Component {
                     key={`${index}-${item.name}`}
                     cartItem={item}
                     selectedCurrency={selectedCurrency}
-                    // handleChangedAttribute={this.changeSelectedAttribute}
                     hideCarousel={true}
                 />
             )

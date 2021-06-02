@@ -41,21 +41,20 @@ export class ProductAttribute extends Component {
 
     handleChange = (value, attributeName) => {
 
-        this.props.sendChosenAttributes(value, attributeName)
-
         this.setState( () => ({
                 [attributeName]: value
             })
         )
 
- 
-
+        this.props.sendChosenAttributes(value, attributeName)
     }
 
     render() {
         let { attribute, productName } = this.props
 
 
+        // attribute is an object, [] brackets are used to 
+        // turn it into array containing object for easier access of properties and identification
         const attributeLabelComponents = [attribute].map( (attribute,index) => {
             
             let attributeName = this.sanitizeVariable(attribute.name)

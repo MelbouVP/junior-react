@@ -8,21 +8,7 @@ import Carousel from '../Carousel/carousel.component'
 import './item.styles.scss'
 
 export class Item extends Component {
-    constructor(props){
-        super(props)
 
-        this.state = {
-            chosenAttributes: []
-        }
-    }
-
-    componentDidMount(){
-        // this.setState( prevState => ({
-        //         ...prevState,
-        //         chosenAttributes: this.props.cartItem.selectedAttributes
-        //     })
-        // )
-    }
 
     changeSelectedAttribute = (productName, attributes) => {
 
@@ -31,11 +17,12 @@ export class Item extends Component {
     }
 
     getChosenAttributes = (value, attributeName) => {
+        const { selectedAttributes, name } = this.props.cartItem
         
-        let attributeExists = this.props.cartItem.selectedAttributes.find( attribute => attribute.name === attributeName)
+        let attributeExists = selectedAttributes.find( attribute => attribute.name === attributeName)
 
         if(attributeExists){
-            let updatedAttributes = this.props.cartItem.selectedAttributes
+            let updatedAttributes = selectedAttributes
                     .map(attribute => {                    
                         if(attribute.name === attributeName){
                             attribute.value = value
@@ -45,35 +32,17 @@ export class Item extends Component {
                         }
             })
 
-            this.changeSelectedAttribute(this.props.cartItem.name, updatedAttributes)
+            this.changeSelectedAttribute(name, updatedAttributes)
 
-            return this.setState( prevState => ({
-                ...prevState,
-                chosenAttributes: updatedAttributes
-            }))
 
         } else {
 
             let updateAttributes = {
-                chosenAttributes: [
-                    ...this.props.cartItem.selectedAttributes,
-                    {
-                        name: attributeName,
-                        value
-                    }
-                ]   
+                name: attributeName,
+                value
             }
 
-            this.changeSelectedAttribute(this.props.cartItem.name, updateAttributes.chosenAttributes)
-
-            return this.setState( prevState => ({
-                chosenAttributes: [
-                    ...prevState.chosenAttributes,
-                    {
-                        name: attributeName,
-                        value
-                    }
-            ]}))
+            this.changeSelectedAttribute(name, updateAttributes)
 
         }
     }

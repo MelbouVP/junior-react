@@ -22,7 +22,6 @@ export class ProductPage extends Component {
     }
 
     componentDidMount(){
-
         if(!this.props.selectedProduct) history.push('/')
     }
 
@@ -66,20 +65,20 @@ export class ProductPage extends Component {
         e.preventDefault()
         const { chosenAttributes } = this.state
 
-        let selectedAttributes = []
-        chosenAttributes.forEach( attribute => {
-            let obj = {}
-            obj.name = attribute.name
-            obj.value = attribute.value
-            selectedAttributes.push(obj)
-        })
+        // let selectedAttributes = []
+        // chosenAttributes.forEach( attribute => {
+        //     let obj = {}
+        //     obj.name = attribute.name
+        //     obj.value = attribute.value
+        //     selectedAttributes.push(obj)
+        // })
 
         let product = {
             name,
             prices,
             gallery,
             attributes,
-            selectedAttributes
+            selectedAttributes: chosenAttributes
         }
     
         this.props.addItem(product)
