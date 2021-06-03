@@ -23,11 +23,12 @@ In order to start this project:
 ## Introduction
 
 Application features minimalistic design and functionality of e-commerce application:
-    1. Product listing page that lists products corresponding to the selected categery
-    2. Product description page, where user can select attributes for the product and add it to the cart
-    3. Cart page that lists all of the cart items with quantities and the selected atributes as well as cart total
-    4. Mini-cart that has the same functionality as cart page
-    5. Currency overlay that allows user to change currency in which product price are displayed
+<br/>
+    *1. Product listing page that lists products corresponding to the selected categery
+    *2. Product description page, where user can select attributes for the product and add it to the cart
+    *3. Cart page that lists all of the cart items with quantities and the selected atributes as well as cart total
+    *4. Mini-cart that has the same functionality as cart page
+    *5. Currency overlay that allows user to change currency in which product price are displayed
 
 ## Technologies
 
@@ -39,7 +40,7 @@ Application features minimalistic design and functionality of e-commerce applica
     * **React router** (v 5.2.0) - front-end routing
     * **React slick** (v 0.28.1) - image carousel
 * **Utility tech**
-    * **Redux-logger** (v 3.0.6) - for debuggin of redux actions
+    * **Redux-logger** (v 3.0.6) - for debugging of redux actions
 
 ## Technology considerations
 
