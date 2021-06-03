@@ -9,44 +9,44 @@ import './item.styles.scss'
 
 export class Item extends Component {
 
+    // This component is responsible for 
+    // rendering information about individual product (parent components - cart overlay and cart page)
+    // and sending changes to selected attributes to the redux state
 
+
+    // Send information about selected attributes for product to the app state
     changeSelectedAttribute = (productName, attributes) => {
 
         this.props.changeCartItemAttribute({name: productName, attributes})
 
     }
 
-    getChosenAttributes = (value, attributeName) => {
+    // Receive data about selected attribute for product from child component 
+    getChosenAttributes = (newValue, attributeName) => {
+
+        // Selected attributes are specified for the product when it is added to cart
         const { selectedAttributes, name } = this.props.cartItem
         
-        let attributeExists = selectedAttributes.find( attribute => attribute.name === attributeName)
-
-        if(attributeExists){
-            let updatedAttributes = selectedAttributes
-                    .map(attribute => {                    
-                        if(attribute.name === attributeName){
-                            attribute.value = value
-                            return attribute
-                        } else {
-                            return attribute
+        // Check which attributes were changed
+        // and updateattribute with new value
+        let updatedAttributes = selectedAttributes
+                .map( prevAttribute => {               
+                    if(prevAttribute.name === attributeName){
+                        return {
+                            ...prevAttribute,
+                            value: newValue
                         }
-            })
+                    } else {
+                        return prevAttribute
+                    }
+        })
 
-            this.changeSelectedAttribute(name, updatedAttributes)
+        this.changeSelectedAttribute(name, updatedAttributes)
 
 
-        } else {
-
-            let updateAttributes = {
-                name: attributeName,
-                value
-            }
-
-            this.changeSelectedAttribute(name, updateAttributes)
-
-        }
     }
 
+    // Send information about product that has to be incremented to the app state
     handleIncrement = () => {
         this.props.incrementItem(this.props.cartItem)
     }
@@ -58,21 +58,31 @@ export class Item extends Component {
 
     render() {
 
+        // Data is received from either Cart overlay component or Cart page component
         const { name, prices, gallery, selectedAttributes, attributes, quantity } = this.props.cartItem || {}
         
+        // Get product price based on selected currency
         const price = this.props.selectedCurrency && prices ? 
             prices.find( price => price.currency === this.props.selectedCurrency.name )
         :   
             null
 
+        
+        // 1.Create product attribute for each of the attributes
+        // 2.Provide selected attribute as attribute that is checked/selected when component is rendered
+        // Product name is used to create unique labels  
+        // 3.Provide random label value to differentiate each product attribute label
+        // if Item component is called multiple times on the same page,
+        // labelValue must come from parent to differentiate instances of Item component 
+        // (Page overlay has to be disabled and cart overlay must be toggled on at cart page to see the effects )
         const productAttributesList = attributes ? 
             attributes.map( (attribute,index) => 
                     <ProductAttribute 
                         key={`${name}+${index}`}
                         attribute={attribute} 
                         sendChosenAttributes={this.getChosenAttributes}
-                        productName={name}
                         selectedAttribute={selectedAttributes[index]}
+                        label={{ productName: name, labelValue: this.props.labelValue ? this.props.labelValue : (Math.ceil(Math.random()*100)) }}
                     />
                 )
         : 
@@ -132,6 +142,8 @@ export class Item extends Component {
 
                     <div className="item__item--image">
 
+                        {/* Image carousel is disabled in cart-overlay aka minicart */}
+                        
                         {
                             gallery.length > 1 && !this.props.hideCarousel ?
                                 <Carousel gallery={gallery}/>

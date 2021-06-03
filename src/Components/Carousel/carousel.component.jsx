@@ -8,10 +8,13 @@ import "slick-carousel/slick/slick-theme.css";
 
 import './carousel.styles.scss'
 
-
 export class Carousel extends Component {
-    render() {
+    
+    // Carousel for product images in Cart page
+    
 
+    render() {
+        // data is received from Item component
         const { gallery } = this.props
 
         const settings = {

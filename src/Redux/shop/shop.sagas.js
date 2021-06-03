@@ -17,18 +17,22 @@ function* fetchProductData(){
 
     try {
 
+        // returns currently selected product category name
         const category = yield select(selectSelectedCategory)
+        // returns list of categories that already exist in state 
+        // i.e. products have been already fetched for the category
         const categories = yield select(selectShopCategoryNames)
 
+        // if category already exists then don't fetch products again
         if(categories.find(categoryName => categoryName === category)) return
 
 
+        // receive data with category name and products
         const data = yield OpusClient.post(CategoryDataQuery(category))
-
-        console.log(data.category.products)
 
         let categoryProducts = {}
 
+        // creates mock pagination for received records
         let productPagination = createInitialProductPagination(data.category.products.length)
 
         categoryProducts[data.category.name] = { products: data.category.products, ...productPagination }

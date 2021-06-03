@@ -13,16 +13,22 @@ import './cart-page.styles.scss'
 
 export class CartPage extends Component {
 
+    // This component is responsible for rendering list of cart items
+    // and sending changes to cart item attributes
 
     render() {
+        // data is received from redux state
         const { cartItems, cartTotal, selectedCurrency } = this.props
 
+
+        // See cart overlay component for key and labelValue explanation
         const cartItemComponents = cartItems.length ?
             cartItems.map( (cartItem,index) => 
                 <Item
                     key={`${cartItem.name}+${index}`} 
                     cartItem={cartItem} 
                     selectedCurrency={selectedCurrency}
+                    labelValue={(Math.ceil(Math.random()*100))}
                 /> 
             )
         :

@@ -22,6 +22,7 @@ export const selectShopCategoryNames = createSelector(
     shop => Object.keys(shop.products)
 )
 
+// select products corresponding to the currently selected category
 export const selectShopCategoryProducts = createSelector(
     [selectShop],
     shop => shop.products[shop.selectedCategory] ? shop.products[shop.selectedCategory].products : null

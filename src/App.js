@@ -22,6 +22,8 @@ const CartPage = lazy(() => import('./Pages/Cart-page/cart-page.component'))
 
 export class App extends Component {
 
+  // fetch currency data
+ // and fetch clothes category product data (default category in redux state)
   componentDidMount() {
     this.props.fetchCurrenciesStart()
     this.props.fetchProductDataStart()

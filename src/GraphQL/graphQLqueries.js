@@ -1,8 +1,8 @@
 import { Query, Field } from '@tilework/opus'
 
 // fetches product data based on category name
-// if category name is empty then fetches all product data
 export const CategoryDataQuery = (categoryName) => {
+    // if category name is all then fetches all product data
     categoryName = categoryName === 'all' ? '' : categoryName
 
     return new Query('category')
@@ -26,4 +26,6 @@ export const CategoryDataQuery = (categoryName) => {
         )
 }
 
+
+// Fetch list of available currencies
 export const CurrencyQuery = new Query('currencies')

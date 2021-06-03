@@ -5,10 +5,18 @@ import { ReactComponent as CartIcon } from '../../Assets/Cart-icon.svg'
 import './product-card.styles.scss'
 
 export class ProductCard extends Component {
+
+
+    // This component is responsible for rendering 
+    // individual product information on product listing page aka PLP
+
+
     render() {
+        // data is received from product listing page
         const { name, inStock, prices, gallery, attributes } = this.props.productData
         const { selectedCurrency, handleRedirect, handleCartItem } = this.props
 
+        // Find products that have swatch attribute
         const swatchAttribute = attributes.filter(attribute => {
             if(attribute.type === 'swatch'){
                 return attribute
@@ -17,6 +25,7 @@ export class ProductCard extends Component {
             }
         })
 
+        // Create visual representation if product has color attribute
         const optionsComponents = swatchAttribute ? 
             swatchAttribute.map( attribute => {
                 return attribute.items.map((item,index) => {

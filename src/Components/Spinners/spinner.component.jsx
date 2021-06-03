@@ -4,6 +4,9 @@ import React, { Component } from 'react'
 import './spinner.styles.scss'
 
 export class Spinner extends Component {
+
+    // This component is responsible for rendering a spinner while data is being fetched
+
     render() {
         return (
             <div className="spinner__container">

@@ -19,15 +19,16 @@ export const selectCartOverlayHidden = createSelector(
     cart => cart.cartOverlayHidden
 );
 
+// Calculate cart total based on currently selected currency
 export const selectCartTotal = createSelector(
     [selectCart, selectedCurrency],
     (cart, selectedCurrency) => {
         
         return cart.cartItems.length ? 
-            cart.cartItems.reduce((accumulator, currentValue) => {
+            cart.cartItems.reduce((accumulator, currentCartItem) => {
             
-                let currency = currentValue.prices.find( price => price.currency === selectedCurrency.name)
-                return (accumulator + (currency.amount*currentValue.quantity))
+                let currency = currentCartItem.prices.find( price => price.currency === selectedCurrency.name)
+                return (accumulator + (currency.amount * currentCartItem.quantity))
             },0)
         :
             null

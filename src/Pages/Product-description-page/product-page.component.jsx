@@ -13,6 +13,18 @@ import { addItem } from '../../Redux/cart/cart.actions'
 
 import './product-page.styles.scss'
 export class ProductPage extends Component {
+
+    // This component is responsible for rendering individual product
+    // and track attributes that were selected for this product
+
+    // 1.There is some code duplication when comparing to Item component
+    // because they serve similar functionality - changing selected attributes of product
+    // and sending the product with selected attributes to the redux state
+    // 2.But Item component can't be re-used on PDP because PDP functionality requires that
+    // the action of adding item with selected attributes to the cart must happen when user clicks 'ADD TO CART' button,
+    // unlike Item component which serves the purpose of altering already existing cart item attributes,
+    // where action of adding/altering cart item can be done when user changes any of the existing product attributes
+
     constructor(props){
         super(props)
 
@@ -21,12 +33,18 @@ export class ProductPage extends Component {
         }
     }
 
+    // if selected product doesn't exist push to PLP
     componentDidMount(){
         if(!this.props.selectedProduct) history.push('/')
     }
 
+
+    // Get selected attribute from Product Attribute component
     getChosenAttributes = (value, attributeName) => {
 
+        // Compare selected attribute to already existing selected attributes
+        // if attribute attribute exists, then update the existing selected attributes with newly selected attribute
+        // if attribute doesn't exists, assign it to state
         this.setState( prevState => {
 
             let attributeExists = prevState.chosenAttributes.find( attribute => attribute.name === attributeName)
@@ -61,17 +79,10 @@ export class ProductPage extends Component {
         })
     }
 
+    // Send product with selected attributes to redux state
     handleCartItem = (e,name, prices, gallery, attributes) => {
         e.preventDefault()
         const { chosenAttributes } = this.state
-
-        // let selectedAttributes = []
-        // chosenAttributes.forEach( attribute => {
-        //     let obj = {}
-        //     obj.name = attribute.name
-        //     obj.value = attribute.value
-        //     selectedAttributes.push(obj)
-        // })
 
         let product = {
             name,
@@ -85,8 +96,11 @@ export class ProductPage extends Component {
     }
 
     render() {
+
+        // data is received from redux state
         const { name, prices, gallery, description, attributes } = this.props.selectedProduct || {}
 
+        // First image is used as main image, other images are used as accessories
         const imageComponents = gallery ? 
             gallery.slice(1).map(
                 (image,index) =>
@@ -97,19 +111,20 @@ export class ProductPage extends Component {
         :
             null
 
-        
+        // find product price corresponding to selected currency
         const price = this.props.selectedCurrency && prices ? 
             prices.find( price => price.currency === this.props.selectedCurrency.name )
         :   
             null
 
+        // See Item component for detailed explanation
         const attributeList = attributes ? 
             attributes.map( (attribute,index) => 
                 <ProductAttribute 
                     key={index}
                     attribute={attribute} 
-                    productName={name}
                     sendChosenAttributes={this.getChosenAttributes}
+                    label={{ productName: name,  labelValue: (Math.ceil(Math.random()*100))}}
                 />
             )
         : 

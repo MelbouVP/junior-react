@@ -10,6 +10,9 @@ import './page-overlay.styles.scss'
 
 export class PageOverlay extends Component {
 
+    // This component is responsible for displaying an overlay over current page
+    // if cart overlay aka minicart is open
+
     render() {
         return (
             <>

@@ -27,42 +27,55 @@ import {
 import './navbar.styles.scss'
 
 export class Navbar extends Component {
+
+    // This component is responsible for rendering:
+    // currency overlay, cart overlay aka minicart and category names
+
     constructor(props){
         super(props)
+
+        // API doesn't provide list of categories, therefore it's hard-coded
         this.state = {
             categories: ['clothes', 'tech', 'all']
         }
     }
 
-    handleCartOverlay = () => {
 
+    handleCartOverlay = () => {
+        // disable cart overlay on cart page
         if(history.location.pathname === '/cart') return
         
+        // currency overlay and cart overlay can't be open at the same time
+        // make sure they don't intersect by closing which ever is open
         if(!this.props.currencyOverlayHidden){
             this.props.toggleCurrencyOverlay()
         }
         return this.props.toggleCartOverlay()
     }
 
-    handleCurrencyOverlay = () =>{
+    handleCurrencyOverlay = () => {
         if(!this.props.cartOverlayHidden){
             this.props.toggleCartOverlay()
         }
         return this.props.toggleCurrencyOverlay()
     }
 
+    // Changes selected currency in redux state
     handleCurrencyChange = (currency) => {
         this.props.changeSelectedCurrency(currency)
         this.props.toggleCurrencyOverlay()
     }
 
+    // Changes selected category in redux state
     handleCategoryChange = (category) =>{
         this.props.changeSelectedCategory(category)
+        // Pushes back to product listing page where results are displayed, if user is on other page
         history.push('/')
     }
 
     render() {
 
+        // data is received from redux state
         const { 
             currencyOverlayHidden, 
             cartOverlayHidden, 
@@ -74,6 +87,8 @@ export class Navbar extends Component {
         } = this.props
 
 
+        // Creates category links in navbar
+        // Highlights link that is currently selected
         const linkComponents = this.state.categories.map( (category, index) => 
             <li key={index}
                 className={`navbar__link ${category === selectedCategory ? 'link-active' : ''}`}

@@ -23,20 +23,28 @@ import './product-listing-page.styles.scss'
 
 export class ProductListingPage extends Component {
 
+    // This component is responsible for listing product cards
+    // in their respective product category and adding selected product to the cart
+
+    // Redirects to product description page
     handleRedirect = (product) => {
 
+        // change selected product in redux state
         this.props.changeSelectedProduct(product)
         history.push(`/product/${product.name}`)
     }
 
+    // Adds product to cart
     handleCartItem = (product) => {
         
+        // provide default attributes to selected product
         let defaultAttributes = product.attributes.map(attribute => ({
-
-                name: (attribute.name).toLowerCase().replace(/ /g, '-'), 
+                
+                name: (attribute.name).toLowerCase().replace(/ /g, '-'), // keeps atribute name clean
                 value: attribute.items[1].value
         }))
 
+        // update product info with selected attributes and add it to cart
         product = {...product, selectedAttributes: defaultAttributes}
 
         this.props.addItem(product)
@@ -44,13 +52,15 @@ export class ProductListingPage extends Component {
 
     render() {
 
+        // data is received from redux state
         const { shopHasLoaded, categoryProducts, selectedCurrency } = this.props
         let { selectedCategory } = this.props
 
 
-        // capitalize first letter
+        // capitalize first letter of category name
         selectedCategory = selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)
 
+        // create product cards
         const productCardComponents = categoryProducts ? 
             categoryProducts.map( (data,index) => 
                 <ProductCard 

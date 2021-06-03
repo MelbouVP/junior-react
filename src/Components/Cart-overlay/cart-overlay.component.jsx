@@ -23,23 +23,36 @@ import './cart-overlay.styles.scss'
 
 export class CartOverlay extends Component {
 
+    // This component is responsible for rendering minicart and cart item cards
+    
+
     handleRedirect = () => {
         history.push('/cart')
+
+        // hide minicart when redirecting user to cart page
         this.props.toggleCartOverlay()
     }
 
     render() {
 
+        // data is received from redux state
         const { cartItems, selectedCurrency, cartItemCount, cartTotal } = this.props
 
-        
+        // 1.Pass user cart items to create individual cart item in the minicart
+        // 2.Key attribute is combination of product name and array index 
+        // because products don't have unique properties such as ID's that can be used 
+        // to differentiate components if they are removed from DOM
+        // 3.Item component has child component ProductAttribute that contains labels
+        // Provide random label value to identify child components that belong to particular 
+        // Item component instance (Item component is used multiple times in application)
         const cartOverlayItemComponents = cartItems ?
             cartItems.map((item, index) => 
                 <Item
-                    key={`${index}-${item.name}`}
+                    key={`${item.name}_${index}`}
                     cartItem={item}
                     selectedCurrency={selectedCurrency}
                     hideCarousel={true}
+                    labelValue={(Math.ceil(Math.random()*100))}
                 />
             )
         :
