@@ -1,7 +1,7 @@
 
 # E-commerce app for junior developer position
 
-This application that was developed as a test for junior react developer position.
+This application was developed as a test for junior react developer position.
 
 ## Table of contents 
 * [How to start](#how-to-start)
