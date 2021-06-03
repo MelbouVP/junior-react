@@ -43,11 +43,11 @@ Application features minimalistic design and functionality of e-commerce applica
 
 ## Technology considerations
 
-    Core considerations for technology stack consisted of choosing of client for interaction with GraphQL backend and library for data fetching
-    <br/>
-    **@tilework/opus** - this technology was chosen to prove that I can learn and implement unfamiliar technology in a new project and also since this is a small project it makes sense to use lighter library compared to heavier library such as Apollo client
-    <br/>
-    **Redux-saga** - E-commerce applications can grow quite big and have a lots of asynchronous communications - 3rd party API communications, database communications etc. Redux-saga provides scalability and maintanability since all of the business logic is contained redux-saga components that each manage their own respective portion of the state. If API communications are done in components or somewhere else it could lead to code pollution. This project could be easily scaled up using redux-saga. 
-    **React-slick** - In provided details, it wasn't mentioned that carousel functionality has to be implemented for cart page, it was implied in cart page design image.
+Core considerations for technology stack consisted of choosing of client for interaction with GraphQL backend and library for data fetching
+<br/>
+**@tilework/opus** - this technology was chosen to prove that I can learn and implement unfamiliar technology in a new project and also since this is a small project it makes sense to use lighter library compared to heavier library such as Apollo client
+<br/>
+**Redux-saga** - E-commerce applications can grow quite big and have a lots of asynchronous communications - 3rd party API communications, database communications etc. Redux-saga provides scalability and maintanability since all of the business logic is contained redux-saga components that each manage their own respective portion of the state. If API communications are done in components or somewhere else it could lead to code pollution. This project could be easily scaled up using redux-saga. 
+**React-slick** - In provided details, it wasn't mentioned that carousel functionality has to be implemented for cart page, it was implied in cart page design image.
 
 
