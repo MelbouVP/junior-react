@@ -24,7 +24,7 @@ In order to start this project:
 
 Application features minimalistic design and functionality of e-commerce application:
 
-1. Product listing page that lists products corresponding to the selected categery
+1. Product listing page that lists products corresponding to the selected category
 2. Product description page, where user can select attributes for the product and add it to the cart
 3. Cart page that lists all of the cart items with quantities and the selected atributes as well as cart total
 4. Mini-cart that has the same functionality as cart page
