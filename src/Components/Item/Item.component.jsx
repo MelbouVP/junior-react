@@ -13,6 +13,8 @@ export class Item extends Component {
     // rendering information about individual product (parent components - cart overlay and cart page)
     // and sending changes to selected attributes to the redux state
 
+    // Part of default styling of this component and also child component - ProductAttribute are overwritten in parent components to fit design needs of each parent component.
+
 
     // Send information about selected attributes for product to the app state
     changeSelectedAttribute = (productName, attributes) => {
