@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect'
 
 import ProductAttribute from '../../Components/Product-attribute/product-attribute.component'
 import PageOverlay from '../../Components/Page-overlay/page-overlay.component'
+import Carousel from '../../Components/Carousel/carousel.component'
 
 import { selectSelectedProduct } from '../../Redux/shop/shop.selectors'
 import { selectSelectedCurrency } from '../../Redux/currency/currency.selectors'
@@ -142,7 +143,8 @@ export class ProductPage extends Component {
                             <div className="product-page__images">
 
                                 <div className="images__main-image">
-                                    <img src={gallery[0]} alt="Product" />
+                                    {/* <img src={gallery[0]} alt="Product" /> */}
+                                    <Carousel gallery={gallery} />
                                 </div>
                                 
                                 <div className="images__accessory-images">
